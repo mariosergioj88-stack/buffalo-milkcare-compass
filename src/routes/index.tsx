@@ -124,6 +124,7 @@ function Index() {
   const [activeModule, setActiveModule] = useState<ModuleId>("pos-ordenha");
   const [savedMessage, setSavedMessage] = useState("");
   const [breedIndex, setBreedIndex] = useState(0);
+  const [breedPaused, setBreedPaused] = useState(false);
   const breedCarouselRef = useRef<HTMLDivElement>(null);
   const [buffaloPart, setBuffaloPart] = useState({
     key: "ubere",
@@ -151,6 +152,7 @@ function Index() {
   const active = useMemo(() => modules.find((item) => item.id === activeModule) ?? modules[0], [activeModule]);
 
   useEffect(() => {
+    if (breedPaused) return;
     const timer = window.setInterval(() => {
       setBreedIndex((current) => {
         const next = (current + 1) % 4;
@@ -161,9 +163,9 @@ function Index() {
         }
         return next;
       });
-    }, 4000);
+    }, 3500);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [breedPaused]);
 
   function moveBreed(direction: number) {
     setBreedIndex((current) => {
@@ -349,7 +351,19 @@ function Index() {
                 <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima imagem" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronRight className="h-5 w-5" /></button>
               </div>
             </div>
-            <div ref={breedCarouselRef} onMouseEnter={() => undefined} className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4">
+            <div
+              ref={breedCarouselRef}
+              onMouseEnter={() => setBreedPaused(true)}
+              onMouseLeave={() => setBreedPaused(false)}
+              onFocus={() => setBreedPaused(true)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setBreedPaused(false);
+              }}
+              onTouchStart={() => setBreedPaused(true)}
+              onTouchEnd={() => setBreedPaused(false)}
+              aria-label="Carrossel automático de raças bubalinas"
+              className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4"
+            >
               {[
                 { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BAfalo_Murrah.JPG?width=1000", credit: "Foto: Paulo Roberto C M Jr. · CC BY 3.0" },
                 { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi%20buffalo%20in%20village.jpg?width=1000", credit: "Foto: Santosh Gore · CC BY-SA 4.0" },
@@ -366,6 +380,19 @@ function Index() {
                   </div>
                 </article>
               ))}
+            </div>
+            <div className="mt-2 flex items-center justify-center gap-2" aria-label="Selecionar raça">
+              {[0, 1, 2, 3].map((index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => moveBreed(index - breedIndex)}
+                  aria-label={`Ir para a raça ${index + 1}`}
+                  aria-current={breedIndex === index ? "true" : undefined}
+                  className={`h-2.5 rounded-full transition-all duration-500 ${breedIndex === index ? "w-8 bg-lime" : "w-2.5 bg-white/40 hover:bg-white/70"}`}
+                />
+              ))}
+              <span className="ml-2 text-xs opacity-75">{breedPaused ? "Pausado" : "Passagem automática"}</span>
             </div>
             <p className="text-xs opacity-70">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
           </div>
