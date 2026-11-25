@@ -300,7 +300,6 @@ function Index() {
                 <a href="#alunos-respondem" className="rounded-xl px-3 py-2 hover:bg-surface">Alunos respondem</a>
                 <a href="#quiz" className="rounded-xl px-3 py-2 hover:bg-surface">Quiz dos búfalos</a>
                 <a href="#mitos-verdades" className="rounded-xl px-3 py-2 hover:bg-surface">Mitos e verdades</a>
-                <a href="#plantas-alimentos" className="rounded-xl px-3 py-2 hover:bg-surface">Plantas e alimentos do rebanho</a>
               </div>
             </details>
             <a href="#historico" className="shrink-0 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Histórico</a>
@@ -670,26 +669,7 @@ function Index() {
         </div>
       </section>
 
-      <section id="plantas-alimentos" className="scroll-mt-20 bg-background py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Alimentação do rebanho</p>
-            <h2 className="display-title mt-3 text-3xl md:text-4xl">Plantas e alimentos do rebanho</h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Conheça exemplos de forrageiras, capins e alimentos usados na alimentação de búfalos. A escolha depende do solo, clima, fase de produção e planejamento nutricional da propriedade.</p>
-          </div>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {name:"Capim-elefante", detail:"Forrageira de alto potencial de produção de massa. O manejo de corte e a oferta devem considerar idade da planta e orientação técnica.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Pennisetum_purpureum.jpg?width=1000"},
-              {name:"Braquiária", detail:"Grupo de gramíneas muito utilizado em pastagens tropicais. A espécie e o manejo precisam ser adequados ao ambiente e ao rebanho.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Brachiaria_Pasture_in_Brazil.jpg?width=1000"},
-              {name:"Tifton", detail:"Gramínea usada em pastagens e produção de feno. A qualidade depende do ponto de corte e da conservação.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Cynodon_dactylon.jpg?width=1000"},
-              {name:"Cana-de-açúcar", detail:"Pode ser utilizada como volumoso em sistemas planejados, com balanceamento da dieta por profissional de nutrição animal.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Sugarcane_field.jpg?width=1000"},
-              {name:"Silagem", detail:"Alimento conservado por fermentação, feito a partir de forragens. A qualidade e a conservação devem ser conferidas antes do fornecimento.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Silagem_de_milho_em_trincheira.jpg?width=1000"},
-              {name:"Feno", detail:"Forragem desidratada para armazenamento. Deve estar seco, sem mofo e protegido da umidade.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Hay_Bales.jpg?width=1000"}
-            ].map((food) => <article key={food.name} className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm"><img src={food.image} alt={food.name} loading="lazy" decoding="async" referrerPolicy="no-referrer" className="h-48 w-full object-cover" onError={(event) => { event.currentTarget.style.visibility = "hidden"; }} /><div className="p-5"><h3 className="text-lg font-semibold">{food.name}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{food.detail}</p></div></article>)}
-          </div>
-          <div className="mt-5 rounded-2xl bg-primary/5 p-5 text-sm leading-relaxed"><strong>Atenção:</strong> não ofereça plantas desconhecidas, mofadas ou contaminadas. A dieta deve ser equilibrada e adaptada aos animais por profissional habilitado. Imagens ilustrativas.</div>
-        </div>
-      </section>
+      
 
       <section id="dicionario" className="scroll-mt-20 bg-background py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-5">
