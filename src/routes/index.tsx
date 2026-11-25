@@ -240,24 +240,38 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <nav className="sticky top-0 z-20 border-b border-border bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-          <a href="#inicio" className="flex items-center gap-3 font-semibold">
-            <img src="/favicon.png" alt="" className="h-10 w-10 object-contain" />
-            <span>Manejo em Dia</span>
+      <nav className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-3">
+          <a href="#inicio" className="flex min-w-0 items-center gap-3">
+            <img src="/favicon.png" alt="" className="h-10 w-10 shrink-0 object-contain" />
+            <span className="flex min-w-0 flex-col leading-tight">
+              <span className="text-base font-bold text-foreground">Manejo em Dia</span>
+              <span className="mt-1 text-[11px] font-medium tracking-wide text-muted-foreground">Projeto de extensão V</span>
+            </span>
           </a>
-          <div className="hidden items-center gap-7 text-sm md:flex">
-            <a href="#rotina" className="hover:opacity-70">Rotina prática</a>
-            <a href="#manejo-sanitario" className="hover:opacity-70">Manejo sanitário</a>
-            <a href="#agua-conforto" className="hover:opacity-70">Água e conforto</a>
-            <a href="#qualidade-leite" className="hover:opacity-70">Qualidade do leite</a>
-            <a href="#identificacao-animais" className="hover:opacity-70">Identificação</a>
-            <a href="#racas" className="hover:opacity-70">Raças bubalinas</a>
-            <a href="#dicionario" className="hover:opacity-70">Dicionário</a>
-            <a href="#alunos-respondem" className="hover:opacity-70">Alunos respondem</a>
-            <a href="#historico" className="hover:opacity-70">Histórico</a>
+          <div className="flex max-w-full flex-1 items-center justify-end gap-2 overflow-x-auto text-sm md:gap-3">
+            <a href="#inicio" className="shrink-0 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Início</a>
+            <details className="group relative shrink-0">
+              <summary className="cursor-pointer list-none rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Manejo <span className="ml-1 text-primary">⌄</span></summary>
+              <div className="absolute right-0 top-full z-40 mt-2 grid min-w-56 gap-1 rounded-2xl border border-border bg-white p-2 text-sm text-foreground shadow-xl">
+                <a href="#rotina" className="rounded-xl px-3 py-2 hover:bg-surface">Rotina prática</a>
+                <a href="#manejo-sanitario" className="rounded-xl px-3 py-2 hover:bg-surface">Manejo sanitário</a>
+                <a href="#agua-conforto" className="rounded-xl px-3 py-2 hover:bg-surface">Água e conforto</a>
+                <a href="#qualidade-leite" className="rounded-xl px-3 py-2 hover:bg-surface">Qualidade do leite</a>
+                <a href="#identificacao-animais" className="rounded-xl px-3 py-2 hover:bg-surface">Identificação dos animais</a>
+              </div>
+            </details>
+            <details className="group relative shrink-0">
+              <summary className="cursor-pointer list-none rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Conhecimento <span className="ml-1 text-primary">⌄</span></summary>
+              <div className="absolute right-0 top-full z-40 mt-2 grid min-w-56 gap-1 rounded-2xl border border-border bg-white p-2 text-sm text-foreground shadow-xl">
+                <a href="#racas" className="rounded-xl px-3 py-2 hover:bg-surface">Raças bubalinas</a>
+                <a href="#dicionario" className="rounded-xl px-3 py-2 hover:bg-surface">Dicionário</a>
+                <a href="#alunos-respondem" className="rounded-xl px-3 py-2 hover:bg-surface">Alunos respondem</a>
+              </div>
+            </details>
+            <a href="#historico" className="shrink-0 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Histórico</a>
           </div>
-          <a href="#rotina" className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Começar</a>
+          <a href="#rotina" className="shrink-0 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90">Começar</a>
         </div>
       </nav>
 
