@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves, BookOpen, Search } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, Minus, Accessibility, ShieldCheck, Trash2, Beef, Milk, Waves, BookOpen, Search } from "lucide-react";
 import heroVideo from "@/assets/bufalas-hero.mp4.asset.json";
 import heroPoster from "@/assets/bufalas-hero-poster.jpg.asset.json";
 import higiene from "@/assets/higiene-ordenha.jpg";
@@ -147,6 +147,9 @@ const dictionaryTerms = [
 
 function Index() {
   const [clickToSpeak, setClickToSpeak] = useState(false);
+  const [accessibilityOpen, setAccessibilityOpen] = useState(false);
+  const [fontScale, setFontScale] = useState(100);
+  const [fontFamily, setFontFamily] = useState("Inter, Arial, sans-serif");
   const [checked, setChecked] = useState<Record<ModuleId, string[]>>({
     "pos-ordenha": [], racao: [], "pre-ordenha": [],
   });
@@ -175,6 +178,11 @@ function Index() {
     label: "Úbere e tetos",
     description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade.",
   });
+
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${fontScale}%`;
+    document.documentElement.style.fontFamily = fontFamily;
+  }, [fontScale, fontFamily]);
 
   useEffect(() => {
     // Carrega o widget oficial do VLibras uma única vez nesta página.
@@ -1135,6 +1143,41 @@ function Index() {
         <div vw-plugin-wrapper="">
           <div vw-plugin-top-wrapper="" />
         </div>
+      </div>
+
+      <div className="fixed bottom-4 right-4 z-[70] flex flex-col items-end gap-2" data-no-speak>
+        {accessibilityOpen && (
+          <section className="w-[min(19rem,calc(100vw-2rem))] rounded-2xl border border-border bg-white p-4 text-[#25392d] shadow-2xl" aria-label="Opções de acessibilidade">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="text-base font-bold">Acessibilidade</h2>
+              <button type="button" onClick={() => setAccessibilityOpen(false)} className="rounded-full px-2 py-1 text-sm font-bold hover:bg-[#edf4ed]" aria-label="Fechar opções">✕</button>
+            </div>
+            <p className="mt-1 text-xs text-[#536258]">Ajuste a leitura para ficar mais confortável.</p>
+            <div className="mt-4">
+              <p className="text-sm font-semibold">Tamanho das letras</p>
+              <div className="mt-2 flex items-center gap-2">
+                <button type="button" onClick={() => setFontScale((size) => Math.max(80, size - 10))} disabled={fontScale <= 80} className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#cbd8cc] disabled:opacity-40" aria-label="Diminuir letras"><Minus className="h-4 w-4" /></button>
+                <span className="min-w-14 text-center text-sm font-bold tabular-nums">{fontScale}%</span>
+                <button type="button" onClick={() => setFontScale((size) => Math.min(150, size + 10))} disabled={fontScale >= 150} className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#cbd8cc] disabled:opacity-40" aria-label="Aumentar letras"><Plus className="h-4 w-4" /></button>
+                <button type="button" onClick={() => setFontScale(100)} className="ml-auto text-xs font-semibold text-[#245b35] underline">Padrão</button>
+              </div>
+            </div>
+            <div className="mt-4">
+              <label htmlFor="accessibility-font" className="text-sm font-semibold">Tipo de letra</label>
+              <select id="accessibility-font" value={fontFamily} onChange={(event) => setFontFamily(event.target.value)} className="mt-2 w-full rounded-xl border border-[#cbd8cc] bg-white px-3 py-2.5 text-sm">
+                <option value="Inter, Arial, sans-serif">Padrão (Inter)</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Verdana, sans-serif">Verdana</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="'Trebuchet MS', sans-serif">Trebuchet</option>
+                <option value="monospace">Monoespaçada</option>
+              </select>
+            </div>
+          </section>
+        )}
+        <button type="button" onClick={() => setAccessibilityOpen((open) => !open)} aria-expanded={accessibilityOpen} className="inline-flex items-center gap-2 rounded-full bg-[#245b35] px-5 py-3 text-sm font-bold text-white shadow-xl transition hover:bg-[#19472a]">
+          <Accessibility className="h-5 w-5" /> Acessibilidade
+        </button>
       </div>
 
       <footer className="border-t border-border">
