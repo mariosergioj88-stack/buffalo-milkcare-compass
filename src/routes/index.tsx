@@ -248,6 +248,7 @@ function Index() {
           </a>
           <div className="hidden items-center gap-7 text-sm md:flex">
             <a href="#rotina" className="hover:opacity-70">Rotina prática</a>
+            <a href="#manejo-sanitario" className="hover:opacity-70">Manejo sanitário</a>
             <a href="#racas" className="hover:opacity-70">Raças bubalinas</a>
             <a href="#dicionario" className="hover:opacity-70">Dicionário</a>
             <a href="#alunos-respondem" className="hover:opacity-70">Alunos respondem</a>
@@ -376,6 +377,57 @@ function Index() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="manejo-sanitario" className="scroll-mt-20 bg-background py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-primary"><ShieldCheck className="h-4 w-4" /> Saúde e prevenção</p>
+            <h2 className="display-title mt-4 text-3xl md:text-5xl">Manejo sanitário do rebanho</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Cuidados diários ajudam a prevenir doenças, identificar problemas mais cedo e manter o bem-estar das búfalas e dos bezerros. Observe os animais, mantenha os ambientes limpos e registre qualquer alteração.</p>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "Observação diária", text: "Observe apetite, comportamento, locomoção, respiração, fezes e aparência geral. Fique atento a isolamento, apatia ou mudanças na rotina." },
+              { title: "Higiene das instalações", text: "Mantenha currais, salas de ordenha, cochos e bebedouros limpos. Retire resíduos e evite acúmulo de lama e matéria orgânica." },
+              { title: "Prevenção e controle", text: "Siga o calendário sanitário definido pelo médico-veterinário, incluindo vacinação, exames e controle de parasitas conforme a realidade da propriedade." },
+              { title: "Entrada de animais", text: "Mantenha animais recém-chegados separados do rebanho pelo período orientado pelo veterinário. Verifique documentos, histórico e condição de saúde." },
+            ].map((item, index) => (
+              <article key={item.title} className="rounded-2xl border border-border bg-surface p-5">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">0{index + 1}</span>
+                <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                <button type="button" onClick={() => speak(item.title + ". " + item.text)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                  <Headphones className="h-4 w-4" /> Ouvir orientação
+                </button>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-5 md:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-2xl border border-border bg-surface p-6">
+              <h3 className="text-xl font-semibold">Checklist de observação</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Use esta lista como apoio na ronda diária. Se notar alguma alteração, registre e comunique ao responsável pelo rebanho.</p>
+              <ul className="mt-5 space-y-3 text-sm leading-relaxed">
+                {[
+                  "Os animais estão comendo e bebendo normalmente?",
+                  "Todas as búfalas caminham sem dificuldade aparente?",
+                  "Há feridas, inchaços, secreções ou sinais de dor?",
+                  "O úbere e os tetos apresentam aparência habitual?",
+                  "Os bebedouros, cochos e instalações estão limpos?",
+                  "Algum animal está isolado ou com comportamento diferente?",
+                ].map((item) => <li key={item} className="flex items-start gap-3"><span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border border-primary/50 text-primary">✓</span><span>{item}</span></li>)}
+              </ul>
+            </div>
+            <aside className="rounded-2xl bg-[#173b2d] p-6 text-white">
+              <ShieldCheck className="h-8 w-8 text-lime-300" />
+              <h3 className="mt-4 text-xl font-semibold">Percebeu algum sinal de doença?</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/85">Avise o responsável e procure orientação de um médico-veterinário. Quando indicado, separe o animal doente com segurança, disponibilize água e evite movimentá-lo sem necessidade.</p>
+              <p className="mt-4 border-t border-white/20 pt-4 text-xs leading-relaxed text-white/70">Não medique por conta própria. Vacinas, medicamentos, doses, intervalos e protocolos devem ser definidos por um profissional habilitado, considerando cada propriedade e região.</p>
+            </aside>
           </div>
         </div>
       </section>
