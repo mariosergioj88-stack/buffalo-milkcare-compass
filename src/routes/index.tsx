@@ -385,9 +385,9 @@ function Index() {
               className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4"
             >
               {[
-                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/A_Murrah_buffalo.jpg?width=1600", credit: "Foto: Oleg Yunakov · CC BY-SA 4.0" },
-                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi_buffalo_in_village.jpg?width=1600", credit: "Foto: Santosh Gore · Wikimedia Commons" },
-                { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_03.jpg?width=1600", credit: "Foto: Bernard Gagnon · Wikimedia Commons" },
+                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Murrah_buffalo_-_01.jpg?width=1800", credit: "Foto: Oleg Yunakov · Wikimedia Commons · CC BY-SA 4.0" },
+                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi_buffalo_in_village.jpg?width=1800", credit: "Foto: Santosh Gore · Wikimedia Commons · CC BY-SA 4.0" },
+                { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_01.jpg?width=1800", credit: "Foto: Bernard Gagnon · Wikimedia Commons" },
                 { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Tem chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Philippine_water_buffalo_(carabao).JPG?width=1600", credit: "Foto: Pinoydiscus · CC BY-SA 3.0" },
               ].map((breed, index) => (
                 <article key={breed.name} className={`w-[82vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-2xl bg-background text-foreground shadow-lg transition ${breedIndex === index ? "ring-4 ring-lime" : ""}`}>
