@@ -114,6 +114,16 @@ const buffaloRegions = [
   { name: "Sul", color: "#a855f7", total: "103.612", share: "5,8%", states: "Paraná, Santa Catarina e Rio Grande do Sul", highlight: "O Paraná lidera a região com 46.735 cabeças, seguido pelo Rio Grande do Sul (44.354) e Santa Catarina (12.523).", note: "O clima mais frio em parte da região exige atenção especial à disponibilidade de abrigo, água e conforto dos animais nas épocas de baixas temperaturas.", points: "281,300 337,326 384,300 368,375 334,443 286,485 252,430 257,366" },
 ] as const;
 
+function handleSpeakClick(event: React.MouseEvent<HTMLDivElement>) {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
+  // Não interrompe botões, links, formulários ou menus: eles continuam funcionando normalmente.
+  if (target.closest("button, a, input, textarea, select, summary, [data-no-speak]")) return;
+  const phrase = target.closest("p, h1, h2, h3, h4, h5, h6, li, label, blockquote");
+  const text = phrase?.textContent?.replace(/\\s+/g, " ").trim();
+  if (text && text.length > 1) speak(text);
+}
+
 function speak(text: string) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
@@ -266,7 +276,7 @@ function Index() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground" onClick={handleSpeakClick}>
       <nav className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-3">
           <a href="#inicio" className="flex min-w-0 items-center gap-3">
@@ -307,6 +317,10 @@ function Index() {
           <a href="#rotina" className="shrink-0 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90">Começar</a>
         </div>
       </nav>
+
+      <div className="border-b border-primary/20 bg-[#f0f8f1] px-5 py-3 text-center text-sm font-semibold text-[#244b30]" role="status">
+        <span className="inline-flex items-center justify-center gap-2"><Headphones className="h-4 w-4 shrink-0" /> Quer ouvir? Clique em qualquer frase ou título para escutar a leitura.</span>
+      </div>
 
       <header id="inicio" className="relative isolate flex min-h-[min(900px,100svh)] items-center justify-center overflow-hidden bg-[#101812] px-5 py-12 text-center text-white">
         <video
