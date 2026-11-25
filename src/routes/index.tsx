@@ -250,61 +250,6 @@ function Index() {
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg md:text-xl">
             Um guia prático para transformar recomendações da cartilha em ações na propriedade.
           </p>
-          <div className="relative mt-1 flex h-[30vh] min-h-[210px] w-full items-center justify-center sm:h-[36vh] md:h-[42vh]" aria-label="Ilustração tridimensional de um búfalo-d'água">
-            <div className="pointer-events-none absolute bottom-5 h-8 w-2/3 max-w-sm rounded-full bg-black/60 blur-2xl" />
-            <svg viewBox="0 0 720 430" role="img" aria-labelledby="buffalo3d-title" className="relative z-10 h-full w-full max-w-[min(96vw,680px)] overflow-visible drop-shadow-[0_24px_30px_rgba(0,0,0,.7)]">
-              <title id="buffalo3d-title">Búfalo-d'água em ilustração tridimensional, visto de três quartos</title>
-              <defs>
-                <linearGradient id="buffalo3d-body" x1="0" y1="0" x2="0.9" y2="1">
-                  <stop offset="0" stopColor="#a98260" /><stop offset=".22" stopColor="#76533b" /><stop offset=".58" stopColor="#493326" /><stop offset="1" stopColor="#211812" />
-                </linearGradient>
-                <linearGradient id="buffalo3d-neck" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#987052" /><stop offset=".42" stopColor="#563a2a" /><stop offset="1" stopColor="#211711" />
-                </linearGradient>
-                <linearGradient id="buffalo3d-face" x1="0" y1="0" x2=".85" y2="1">
-                  <stop offset="0" stopColor="#9a7254" /><stop offset=".38" stopColor="#5c3d2c" /><stop offset="1" stopColor="#241913" />
-                </linearGradient>
-                <linearGradient id="buffalo3d-horn" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#fff0cf" /><stop offset=".35" stopColor="#d0bd9a" /><stop offset=".72" stopColor="#81745f" /><stop offset="1" stopColor="#3d382f" />
-                </linearGradient>
-                <linearGradient id="buffalo3d-leg" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="#624633" /><stop offset=".5" stopColor="#2b1e17" /><stop offset="1" stopColor="#120e0b" />
-                </linearGradient>
-                <radialGradient id="buffalo3d-gloss" cx=".28" cy=".18" r=".85">
-                  <stop offset="0" stopColor="#f4d5ae" stopOpacity=".62" /><stop offset=".55" stopColor="#d0a47d" stopOpacity=".12" /><stop offset="1" stopColor="#120d09" stopOpacity="0" />
-                </radialGradient>
-                <linearGradient id="buffalo3d-muzzle" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#8a6852" /><stop offset="1" stopColor="#33231c" />
-                </linearGradient>
-              </defs>
-              <ellipse cx="363" cy="377" rx="245" ry="23" fill="#000" opacity=".42" />
-              <ellipse cx="352" cy="214" rx="226" ry="112" fill="url(#buffalo3d-body)" stroke="#211710" strokeWidth="8" />
-              <path d="M172 154 C130 125 100 139 84 176 C117 160 140 177 169 194Z" fill="#513827" stroke="#241811" strokeWidth="7" />
-              <path d="M520 158 C562 128 594 145 608 182 C574 164 551 181 523 199Z" fill="#302117" stroke="#1b120d" strokeWidth="7" />
-              <path d="M177 140 C159 95 172 55 208 44 C244 33 270 60 261 91 C254 115 229 132 205 151Z" fill="url(#buffalo3d-horn)" stroke="#393024" strokeWidth="8" />
-              <path d="M493 140 C520 95 511 57 480 43 C448 28 418 52 424 85 C429 112 454 133 477 151Z" fill="url(#buffalo3d-horn)" stroke="#393024" strokeWidth="8" />
-              <path d="M194 157 C242 117 355 112 459 145 C508 161 538 198 532 246 C523 298 456 327 354 326 C252 325 172 294 150 244 C135 210 154 179 194 157Z" fill="url(#buffalo3d-gloss)" />
-              <path d="M198 271 L191 355 Q190 371 207 373 L228 373 L244 282Z" fill="url(#buffalo3d-leg)" stroke="#1b120d" strokeWidth="7" />
-              <path d="M284 294 L278 359 Q278 374 294 376 L314 376 L326 301Z" fill="url(#buffalo3d-leg)" stroke="#1b120d" strokeWidth="7" />
-              <path d="M444 291 L456 357 Q460 374 476 372 L496 367 L480 270Z" fill="url(#buffalo3d-leg)" stroke="#1b120d" strokeWidth="7" />
-              <path d="M505 258 L531 344 Q536 361 552 355 L570 347 L542 226Z" fill="url(#buffalo3d-leg)" stroke="#1b120d" strokeWidth="7" />
-              <path d="M189 363 L230 363 L235 382 L185 382Z M277 365 L315 365 L321 383 L274 383Z M455 360 L495 353 L504 371 L461 382Z M530 344 L568 337 L579 354 L540 365Z" fill="#17110d" />
-              <path d="M476 174 C526 157 568 171 587 206 C604 237 587 281 553 302 C527 318 489 309 461 284 C442 267 435 229 450 201Z" fill="url(#buffalo3d-neck)" stroke="#1c130e" strokeWidth="8" />
-              <path d="M523 183 C562 176 595 198 601 228 C606 258 587 286 558 293 C538 296 514 285 499 264 C526 260 544 235 523 183Z" fill="#241811" opacity=".55" />
-              <path d="M527 184 C548 156 585 147 612 165 C637 182 644 217 627 247 C613 273 581 287 550 272 C527 260 510 225 527 184Z" fill="url(#buffalo3d-face)" stroke="#1b120d" strokeWidth="8" />
-              <path d="M547 179 C565 153 592 150 611 167 C584 166 568 185 562 207Z" fill="#c59a73" opacity=".32" />
-              <path d="M580 151 C591 116 622 102 646 118 C668 133 660 163 637 180 C620 193 599 187 580 177Z" fill="url(#buffalo3d-horn)" stroke="#393024" strokeWidth="7" />
-              <path d="M541 171 C526 140 534 112 556 103 C580 94 599 111 593 133 C588 151 568 166 550 180Z" fill="url(#buffalo3d-horn)" stroke="#393024" strokeWidth="7" />
-              <path d="M613 215 C640 205 664 219 667 241 C670 261 648 278 622 275 C602 273 586 258 589 240Z" fill="url(#buffalo3d-muzzle)" stroke="#1c120e" strokeWidth="6" />
-              <ellipse cx="642" cy="242" rx="4.5" ry="6" fill="#100b08" /><ellipse cx="618" cy="246" rx="4.5" ry="6" fill="#100b08" />
-              <path d="M582 202 Q597 193 609 201" fill="none" stroke="#160f0b" strokeWidth="7" strokeLinecap="round" />
-              <ellipse cx="594" cy="198" rx="5" ry="7" fill="#090706" /><circle cx="596" cy="196" r="2" fill="#fff" opacity=".9" />
-              <path d="M557 285 Q579 300 598 283" fill="none" stroke="#17100c" strokeWidth="5" strokeLinecap="round" />
-              <path d="M210 154 C281 125 391 131 466 165" fill="none" stroke="#e0b891" strokeWidth="9" strokeLinecap="round" opacity=".2" />
-              <path d="M159 206 C166 250 196 282 232 294" fill="none" stroke="#d7ae86" strokeWidth="7" strokeLinecap="round" opacity=".17" />
-              <path d="M350 319 C377 332 405 330 427 319" fill="none" stroke="#160f0b" strokeWidth="5" opacity=".55" />
-            </svg>
-          </div>
           <a href="#rotina" className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-lg transition hover:scale-[1.02] hover:opacity-95 sm:text-base">
             Escolher uma atividade <ArrowRight className="h-5 w-5" />
           </a>
