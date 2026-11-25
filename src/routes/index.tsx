@@ -36,6 +36,8 @@ const modules: {
   number: string;
   title: string;
   summary: string;
+  problem: string;
+  objective: string;
   image: string;
   imageAlt: string;
   icon: typeof Droplets;
@@ -47,6 +49,8 @@ const modules: {
     number: "01",
     title: "Pós-ordenha e amamentação",
     summary: "Organize o momento depois da ordenha e acompanhe a amamentação dos bezerros.",
+    problem: "Quando búfalas e bezerros são soltos todos juntos, pode ser difícil observar se cada bezerro mamou na própria mãe.",
+    objective: "Separar os animais em grupos, acompanhar a mamada por cerca de 20 a 30 minutos e só depois fazer a liberação geral.",
     image: posOrdenha,
     imageAlt: "Cuidados com búfalas após a ordenha",
     icon: ShieldCheck,
@@ -64,6 +68,8 @@ const modules: {
     number: "02",
     title: "Armazenamento de ração e farelos",
     summary: "Proteja os alimentos contra umidade, sujeira, pragas e contato direto com o chão.",
+    problem: "Sacos apoiados diretamente no piso ou encostados nas paredes podem absorver umidade e facilitar a contaminação por pragas.",
+    objective: "Usar paletes, manter espaço para circulação de ar e guardar a ração em um depósito seco, limpo e protegido.",
     image: racao,
     imageAlt: "Ração armazenada de forma organizada",
     icon: Package,
@@ -82,6 +88,8 @@ const modules: {
     number: "03",
     title: "Higiene antes da ordenha",
     summary: "Prepare os tetos, os equipamentos e o local para uma ordenha mais segura.",
+    problem: "Sujeira nos tetos, nas mãos ou nos equipamentos pode comprometer a higiene durante a ordenha e a qualidade do leite.",
+    objective: "Seguir a sequência de limpeza, pré-dipping e secagem individual dos tetos, respeitando o produto utilizado.",
     image: higiene,
     imageAlt: "Higienização antes da ordenha",
     icon: Droplets,
@@ -185,7 +193,7 @@ function Index() {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Orientação prática para o dia a dia</p>
             <h1 className="display-title mt-5 text-4xl md:text-6xl">MANEJO EM DIA</h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">Aprenda, acompanhe e registre três cuidados importantes na produção de leite de búfalas.</p>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">Um guia prático para transformar recomendações da cartilha em ações na propriedade. Entenda o que precisa ser melhorado, siga as etapas de manejo e registre o que foi realizado.</p>
             <a href="#rotina" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-semibold text-primary-foreground hover:opacity-90">
               Escolher uma atividade <ArrowRight className="h-5 w-5" />
             </a>
@@ -199,7 +207,7 @@ function Index() {
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Aprender e registrar</p>
             <h2 className="display-title mt-4 text-3xl md:text-5xl">Três atividades importantes do dia a dia.</h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Escolha uma atividade, leia as orientações e marque cada etapa quando ela for realizada.</p>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Os módulos foram organizados a partir de três pontos de melhoria identificados na rotina da propriedade. Em cada um, você encontra o problema observado, a melhoria proposta e uma lista para acompanhar a execução.</p>
           </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -214,6 +222,10 @@ function Index() {
                   </div>
                   <h3 className="mt-4 text-xl font-semibold">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.summary}</p>
+                  <div className="mt-4 border-t border-border pt-3">
+                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">O que este módulo busca melhorar</p>
+                    <p className="mt-1 text-sm leading-relaxed">{item.objective}</p>
+                  </div>
                   <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">{selected ? "Atividade selecionada" : "Abrir atividade"} <ArrowRight className="h-4 w-4" /></span>
                 </button>
               );
@@ -234,6 +246,16 @@ function Index() {
                   </button>
                 </div>
                 <p className="mt-3 leading-relaxed text-muted-foreground">{active.summary}</p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border p-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Problema identificado</p>
+                    <p className="mt-2 text-sm leading-relaxed">{active.problem}</p>
+                  </div>
+                  <div className="rounded-2xl bg-surface p-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-primary">Melhoria proposta</p>
+                    <p className="mt-2 text-sm leading-relaxed">{active.objective}</p>
+                  </div>
+                </div>
                 <div className="mt-6 flex items-center justify-between gap-3">
                   <h4 className="font-semibold">Lista de verificação</h4>
                   <span className="text-sm text-muted-foreground">{checked[activeModule].length} de {active.steps.length} concluídas</span>
