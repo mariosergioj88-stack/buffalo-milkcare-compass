@@ -249,6 +249,9 @@ function Index() {
           <div className="hidden items-center gap-7 text-sm md:flex">
             <a href="#rotina" className="hover:opacity-70">Rotina prática</a>
             <a href="#manejo-sanitario" className="hover:opacity-70">Manejo sanitário</a>
+            <a href="#agua-conforto" className="hover:opacity-70">Água e conforto</a>
+            <a href="#qualidade-leite" className="hover:opacity-70">Qualidade do leite</a>
+            <a href="#identificacao-animais" className="hover:opacity-70">Identificação</a>
             <a href="#racas" className="hover:opacity-70">Raças bubalinas</a>
             <a href="#dicionario" className="hover:opacity-70">Dicionário</a>
             <a href="#alunos-respondem" className="hover:opacity-70">Alunos respondem</a>
@@ -429,6 +432,103 @@ function Index() {
               <p className="mt-4 border-t border-white/20 pt-4 text-xs leading-relaxed text-white/70">Não medique por conta própria. Vacinas, medicamentos, doses, intervalos e protocolos devem ser definidos por um profissional habilitado, considerando cada propriedade e região.</p>
             </aside>
           </div>
+        </div>
+      </section>
+
+      <section id="agua-conforto" className="scroll-mt-20 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Bem-estar do rebanho</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Água e conforto térmico</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Búfalas precisam de água limpa e disponível, sombra e condições para aliviar o calor. Acompanhe os pontos de água e observe como os animais se comportam nos períodos mais quentes.</p>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {[
+              { title: "Água limpa e acessível", text: "Mantenha bebedouros abastecidos, limpos e em locais de fácil acesso. Confira diariamente a qualidade da água e o funcionamento dos pontos de abastecimento." },
+              { title: "Sombra e ventilação", text: "Disponibilize áreas sombreadas e espaços com boa circulação de ar. Nos horários mais quentes, evite manejos e deslocamentos desnecessários." },
+              { title: "Área para resfriamento", text: "Quando houver área de banho ou lama, mantenha-a em condições higiênicas, com acesso seguro e manejo que evite acúmulo excessivo de dejetos e lama nos locais de circulação." },
+            ].map((item) => (
+              <article key={item.title} className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+                <Waves className="h-7 w-7 text-primary" />
+                <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                <button type="button" onClick={() => speak(item.title + ". " + item.text)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"><Headphones className="h-4 w-4" /> Ouvir orientação</button>
+              </article>
+            ))}
+          </div>
+          <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-5">
+            <p className="font-semibold text-foreground">Fique atento ao calor</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Respiração muito acelerada, salivação intensa, fraqueza ou mudança importante de comportamento exigem atenção. Leve o caso ao responsável e procure orientação veterinária.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="qualidade-leite" className="scroll-mt-20 bg-surface py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Da ordenha ao armazenamento</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Qualidade do leite</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">A qualidade começa na higiene durante a ordenha e continua nos cuidados com os utensílios, o resfriamento, o armazenamento e o transporte.</p>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            <article className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+              <Milk className="h-7 w-7 text-primary" />
+              <h3 className="mt-4 text-lg font-semibold">Cuidados durante a ordenha</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
+                {[
+                  "Higienize as mãos, os tetos e os equipamentos conforme a rotina da propriedade.",
+                  "Utilize utensílios limpos e próprios para contato com alimentos.",
+                  "Observe os primeiros jatos e comunique alterações no leite ou no úbere.",
+                  "Evite misturar leite de animais com suspeita de doença ou em tratamento sem orientação técnica.",
+                ].map((item) => <li key={item} className="flex gap-3"><span className="font-bold text-primary">✓</span><span>{item}</span></li>)}
+              </ul>
+            </article>
+            <article className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+              <ClipboardCheck className="h-7 w-7 text-primary" />
+              <h3 className="mt-4 text-lg font-semibold">Depois da ordenha</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
+                {[
+                  "Filtre o leite quando esse procedimento fizer parte do sistema utilizado.",
+                  "Resfrie e mantenha o leite na temperatura e pelo tempo exigidos pelas normas e pelo laticínio responsável.",
+                  "Mantenha o recipiente ou tanque fechado, limpo e protegido de contaminantes.",
+                  "Transporte o leite nas condições adequadas, evitando demora e variações de temperatura.",
+                ].map((item) => <li key={item} className="flex gap-3"><span className="font-bold text-primary">✓</span><span>{item}</span></li>)}
+              </ul>
+            </article>
+          </div>
+          <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Siga os procedimentos do serviço de inspeção, as normas vigentes e as orientações do estabelecimento que recebe o leite. Os parâmetros de resfriamento e conservação dependem da regulamentação aplicável.</p>
+          <button type="button" onClick={() => speak("A qualidade do leite depende da higiene na ordenha, de utensílios limpos, do resfriamento adequado, do armazenamento protegido e do transporte correto. Siga as normas vigentes e as orientações do laticínio.")} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"><Headphones className="h-4 w-4" /> Ouvir resumo</button>
+        </div>
+      </section>
+
+      <section id="identificacao-animais" className="scroll-mt-20 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Organização do rebanho</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Identificação dos animais</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">A identificação individual ajuda a reconhecer cada búfala, acompanhar sua história e manter os registros da propriedade organizados.</p>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-[0.9fr_1.1fr]">
+            <article className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+              <Beef className="h-7 w-7 text-primary" />
+              <h3 className="mt-4 text-lg font-semibold">Como identificar?</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Utilize o método de identificação adotado pela propriedade, como brincos numerados ou outro sistema individual apropriado. A identificação deve ser legível, durável e realizada de forma correta, com higiene e manejo cuidadoso.</p>
+            </article>
+            <article className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+              <ClipboardCheck className="h-7 w-7 text-primary" />
+              <h3 className="text-lg font-semibold">O que registrar na ficha?</h3>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {["Número ou código do animal", "Raça e data de nascimento", "Histórico de vacinação e exames", "Partos e reprodução", "Produção de leite", "Tratamentos e ocorrências"].map((item) => (
+                  <div key={item} className="rounded-xl bg-surface p-3 text-sm text-foreground"><span className="mr-2 font-bold text-primary">✓</span>{item}</div>
+                ))}
+              </div>
+            </article>
+          </div>
+          <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-5">
+            <p className="font-semibold text-foreground">Dica para a rotina</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Atualize os registros sempre que houver nascimento, mudança de lote, vacinação, tratamento, parto ou alteração importante na produção. Proteja as fichas e mantenha uma cópia de segurança.</p>
+          </div>
+          <button type="button" onClick={() => speak("A identificação individual permite reconhecer cada búfala e acompanhar seu histórico. Registre o número do animal, raça, nascimento, vacinação, exames, partos, reprodução, produção de leite e tratamentos.")} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"><Headphones className="h-4 w-4" /> Ouvir resumo</button>
         </div>
       </section>
 
