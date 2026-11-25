@@ -172,3 +172,8 @@
   letter-spacing: -0.02em;
   line-height: 1.12;
 }
+
+/* Mantém o atalho de Libras acima do botão próprio de acessibilidade. */
+[vw] [vw-access-button] {
+  bottom: 5.5rem !important;
+}
