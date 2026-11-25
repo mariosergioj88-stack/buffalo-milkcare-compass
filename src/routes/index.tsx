@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves } from "lucide-react";
 import hero from "@/assets/bufalas-pasto.jpg";
 import higiene from "@/assets/higiene-ordenha.jpg";
 import posOrdenha from "@/assets/pos-ordenha.jpg";
@@ -123,6 +123,12 @@ function Index() {
   const [history, setHistory] = useState<Activity[]>([]);
   const [activeModule, setActiveModule] = useState<ModuleId>("pos-ordenha");
   const [savedMessage, setSavedMessage] = useState("");
+  const [breedIndex, setBreedIndex] = useState(0);
+  const [buffaloPart, setBuffaloPart] = useState({
+    key: "ubere",
+    label: "Úbere e tetos",
+    description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade.",
+  });
 
   useEffect(() => {
     try {
@@ -300,59 +306,85 @@ function Index() {
       <section id="racas" className="scroll-mt-20 bg-forest text-forest-foreground">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Conheça o rebanho</p>
-          <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Raças bubalinas criadas no Brasil.</h2>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed opacity-90">As raças possuem características físicas e aptidões diferentes. Conhecer essas diferenças ajuda a entender o perfil dos animais da propriedade. No Brasil, a Associação Brasileira de Criadores de Búfalos reconhece quatro raças: Murrah, Jafarabadi, Mediterrânea e Carabao.</p>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 01</span>
-                <Milk className="h-7 w-7 text-primary" />
+          <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Explore uma búfala e conheça os búfalos.</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed opacity-90">Passe pelas imagens para conhecer as principais raças criadas no Brasil e um pouco da rotina desses animais. Depois, explore a imagem interativa e descubra partes importantes do corpo da búfala.</p>
+
+          <div className="mt-10">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-wider text-lime">Galeria de imagens</p>
+                <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Conheça as raças bubalinas</h3>
+                <p className="mt-2 max-w-2xl text-sm opacity-80">Deslize para o lado ou use as setas para conhecer cada raça.</p>
               </div>
-              <h3 className="mt-3 text-2xl font-semibold">Murrah</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">Originária da Índia, é conhecida pelos chifres curtos e enrolados em espiral. Apresenta corpo compacto, robusto e boa aptidão leiteira. Também pode ser aproveitada para produção de carne.</p>
-              <div className="mt-4 rounded-xl bg-surface p-4">
-                <p className="text-sm font-bold text-primary">Como reconhecer</p>
-                <p className="mt-1 text-sm leading-relaxed">Pelagem geralmente preta, corpo compacto e chifres que se curvam para trás e para dentro, formando espirais.</p>
+              <div className="flex gap-2">
+                <button type="button" onClick={() => setBreedIndex((value) => (value + 3) % 4)} aria-label="Imagem anterior" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronLeft className="h-5 w-5" /></button>
+                <button type="button" onClick={() => setBreedIndex((value) => (value + 1) % 4)} aria-label="Próxima imagem" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronRight className="h-5 w-5" /></button>
               </div>
-            </article>
-            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 02</span>
-                <Beef className="h-7 w-7 text-primary" />
-              </div>
-              <h3 className="mt-3 text-2xl font-semibold">Jafarabadi</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">Também originária da Índia, é conhecida pelo grande porte, cabeça forte e chifres longos e pesados, que descem próximos à cabeça e se curvam nas pontas. Tem aptidão mista: leite e carne.</p>
-              <div className="mt-4 rounded-xl bg-surface p-4">
-                <p className="text-sm font-bold text-primary">Como reconhecer</p>
-                <p className="mt-1 text-sm leading-relaxed">Corpo grande e forte, testa proeminente e chifres longos, grossos e caídos.</p>
-              </div>
-            </article>
-            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 03</span>
-                <Milk className="h-7 w-7 text-primary" />
-              </div>
-              <h3 className="mt-3 text-2xl font-semibold">Mediterrânea</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">Selecionada na Itália, apresenta aptidão para leite e carne. Tem pelagem geralmente preta, corpo de porte médio a grande e características que lembram as raças Murrah e Jafarabadi.</p>
-              <div className="mt-4 rounded-xl bg-surface p-4">
-                <p className="text-sm font-bold text-primary">Como reconhecer</p>
-                <p className="mt-1 text-sm leading-relaxed">Animais geralmente pretos, com formato corporal intermediário e chifres que tendem a se projetar para os lados e para trás.</p>
-              </div>
-            </article>
-            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 04</span>
-                <Waves className="h-7 w-7 text-primary" />
-              </div>
-              <h3 className="mt-3 text-2xl font-semibold">Carabao</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">Originária do Sudeste Asiático, é conhecida como búfalo-do-pântano. Tem pelagem que pode variar entre cinza e rosilho, corpo forte e grande adaptação a ambientes alagados. É utilizada principalmente para carne e trabalho.</p>
-              <div className="mt-4 rounded-xl bg-surface p-4">
-                <p className="text-sm font-bold text-primary">Como reconhecer</p>
-                <p className="mt-1 text-sm leading-relaxed">Corpo mais largo, chifres que se abrem lateralmente e pelagem que pode ser mais clara ou acinzentada.</p>
-              </div>
-            </article>
+            </div>
+            <div className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4">
+              {[
+                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BAfalo_Murrah.JPG?width=1000", credit: "Foto: Paulo Roberto C M Jr. · CC BY 3.0" },
+                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi%20buffalo%20in%20village.jpg?width=1000", credit: "Foto: Santosh Gore · CC BY-SA 4.0" },
+                { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian%20Mediterranean%20buffaloes%2001.jpg?width=1000", credit: "Imagem: Wikimedia Commons" },
+                { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Tem chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/San%20Vicente%2C%20Carabao%2C%20Buffalo%2C%20Palawan%2C%20Philippines.jpg?width=1000", credit: "Imagem: Wikimedia Commons" },
+              ].map((breed, index) => (
+                <article key={breed.name} className={`w-[82vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-2xl bg-background text-foreground shadow-lg transition ${breedIndex === index ? "ring-4 ring-lime" : ""}`}>
+                  <img src={breed.image} alt={`Búfalo da raça ${breed.name}`} loading="lazy" className="h-56 w-full object-cover" />
+                  <div className="p-5">
+                    <p className="text-xs font-bold uppercase tracking-wider text-primary">Raça bubalina</p>
+                    <h4 className="mt-2 text-2xl font-semibold">{breed.name}</h4>
+                    <p className="mt-2 min-h-20 text-sm leading-relaxed text-muted-foreground">{breed.detail}</p>
+                    <p className="mt-4 text-xs text-muted-foreground">{breed.credit}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p className="text-xs opacity-70">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
           </div>
-          <p className="mt-7 text-sm leading-relaxed opacity-80">Observação: a identificação da raça deve considerar o conjunto das características do animal e, quando necessário, o registro genealógico. Há variações entre indivíduos.</p>
+
+          <div className="mt-16 grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-wider text-lime">Explore e aprenda</p>
+              <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Conheça o corpo de uma búfala</h3>
+              <p className="mt-3 leading-relaxed opacity-90">Toque nos pontos destacados na imagem. Cada ponto abre uma explicação simples sobre uma parte do animal e os cuidados relacionados ao manejo.</p>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {[
+                  { key: "cabeca", label: "Cabeça e chifres", description: "A cabeça e o formato dos chifres ajudam a observar características físicas e diferenças entre as raças. A aproximação deve ser feita com calma e segurança, sem ficar na área de alcance dos chifres." },
+                  { key: "dorso", label: "Dorso e corpo", description: "Observe o estado corporal, a postura e a presença de ferimentos ou alterações. Acompanhar essas condições ajuda a perceber mudanças na saúde e no bem-estar." },
+                  { key: "ubere", label: "Úbere e tetos", description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade." },
+                  { key: "cascos", label: "Pernas e cascos", description: "Observe a caminhada, a limpeza e possíveis rachaduras ou lesões. Dificuldade para andar ou apoiar uma das patas merece avaliação." },
+                ].map((part) => (
+                  <button key={part.key} type="button" onClick={() => setBuffaloPart(part)} className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${buffaloPart.key === part.key ? "border-lime bg-lime text-forest" : "border-white/30 hover:bg-white/10"}`}>{part.label}</button>
+                ))}
+              </div>
+              <div className="mt-5 rounded-2xl bg-background p-5 text-foreground" aria-live="polite">
+                <p className="text-xs font-bold uppercase tracking-wider text-primary">Você selecionou</p>
+                <h4 className="mt-1 text-xl font-semibold">{buffaloPart.label}</h4>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{buffaloPart.description}</p>
+                <button type="button" onClick={() => speak(`${buffaloPart.label}. ${buffaloPart.description}`)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary"><Headphones className="h-4 w-4" /> Ouvir explicação</button>
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-3">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20Murrah%20buffalo.jpg?width=1200" alt="Búfala Murrah em vista lateral, para observar as partes do corpo" loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />
+              <span className="absolute left-5 top-5 rounded-full bg-background/90 px-3 py-2 text-xs font-bold text-foreground">Imagem educativa interativa</span>
+              <div className="absolute left-[57%] top-[27%]">
+                <button type="button" onClick={() => setBuffaloPart({ key: "cabeca", label: "Cabeça e chifres", description: "A cabeça e o formato dos chifres ajudam a observar características físicas e diferenças entre as raças. A aproximação deve ser feita com calma e segurança, sem ficar na área de alcance dos chifres." })} aria-label="Explorar cabeça e chifres" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+              </div>
+              <div className="absolute left-[48%] top-[49%]">
+                <button type="button" onClick={() => setBuffaloPart({ key: "dorso", label: "Dorso e corpo", description: "Observe o estado corporal, a postura e a presença de ferimentos ou alterações. Acompanhar essas condições ajuda a perceber mudanças na saúde e no bem-estar." })} aria-label="Explorar dorso e corpo" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+              </div>
+              <div className="absolute left-[36%] top-[72%]">
+                <button type="button" onClick={() => setBuffaloPart({ key: "ubere", label: "Úbere e tetos", description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade." })} aria-label="Explorar úbere e tetos" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+              </div>
+              <div className="absolute left-[67%] top-[79%]">
+                <button type="button" onClick={() => setBuffaloPart({ key: "cascos", label: "Pernas e cascos", description: "Observe a caminhada, a limpeza e possíveis rachaduras ou lesões. Dificuldade para andar ou apoiar uma das patas merece avaliação." })} aria-label="Explorar pernas e cascos" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+              </div>
+              <p className="px-2 py-3 text-center text-xs opacity-75">Selecione um dos pontos sobre a imagem ou use os botões ao lado.</p>
+            </div>
+          </div>
+          <div className="mt-10 rounded-2xl border border-white/20 bg-white/10 p-5 text-sm leading-relaxed">
+            <strong>Sobre o recurso:</strong> esta primeira versão usa uma fotografia com pontos interativos, não um modelo 3D giratório. Assim, o conteúdo já funciona em celular e computador. Um modelo 3D real poderá ser integrado depois, quando tivermos um arquivo próprio em formato GLB ou GLTF.
+          </div>
         </div>
       </section>
 
