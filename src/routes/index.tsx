@@ -442,10 +442,10 @@ function Index() {
               className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4"
             >
               {[
-                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BAfalo_Murrah.JPG?width=1000", credit: "Foto: Paulo Roberto C M Jr. · CC BY 3.0" },
-                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi%20buffalo%20in%20village.jpg?width=1000", credit: "Foto: Santosh Gore · CC BY-SA 4.0" },
-                { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian%20Mediterranean%20buffaloes%2001.jpg?width=1000", credit: "Imagem: Wikimedia Commons" },
-                { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Tem chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/San%20Vicente%2C%20Carabao%2C%20Buffalo%2C%20Palawan%2C%20Philippines.jpg?width=1000", credit: "Imagem: Wikimedia Commons" },
+                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/A_Murrah_buffalo.jpg?width=1600", credit: "Foto: Oleg Yunakov · CC BY-SA 4.0" },
+                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi_buffalo_in_village.jpg?width=1600", credit: "Foto: Santosh Gore · Wikimedia Commons" },
+                { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_03.jpg?width=1600", credit: "Foto: Bernard Gagnon · Wikimedia Commons" },
+                { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Tem chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Philippine_water_buffalo_(carabao).JPG?width=1600", credit: "Foto: Pinoydiscus · CC BY-SA 3.0" },
               ].map((breed, index) => (
                 <article key={breed.name} className={`w-[82vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-2xl bg-background text-foreground shadow-lg transition ${breedIndex === index ? "ring-4 ring-lime" : ""}`}>
                   <img src={breed.image} alt={`Búfalo da raça ${breed.name}`} loading="lazy" className="h-56 w-full object-cover" />
@@ -497,7 +497,7 @@ function Index() {
               </div>
             </div>
             <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-3">
-              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A%20Murrah%20buffalo.jpg?width=1200" alt="Búfala Murrah em vista lateral, para observar as partes do corpo" loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_Murrah_buffalo.jpg?width=1800" alt="Búfala Murrah em vista lateral, para observar as partes do corpo" loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />
               <span className="absolute left-5 top-5 rounded-full bg-background/90 px-3 py-2 text-xs font-bold text-foreground">Imagem educativa interativa</span>
               <div className="absolute left-[57%] top-[27%]">
                 <button type="button" onClick={() => setBuffaloPart({ key: "cabeca", label: "Cabeça e chifres", description: "A cabeça e o formato dos chifres ajudam a observar características físicas e diferenças entre as raças. A aproximação deve ser feita com calma e segurança, sem ficar na área de alcance dos chifres." })} aria-label="Explorar cabeça e chifres" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
