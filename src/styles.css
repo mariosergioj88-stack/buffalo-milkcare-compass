@@ -30,8 +30,12 @@
  */
 
 @theme inline {
-  --font-display: 'Fraunces', serif;
-  --font-sans: 'Source Sans 3', sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --color-forest: var(--forest);
+  --color-forest-foreground: var(--forest-foreground);
+  --color-lime: var(--lime);
+  --color-surface: var(--surface);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -75,26 +79,30 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.97 0.02 85);
-  --foreground: oklch(0.22 0.03 60);
-  --card: oklch(0.99 0.01 85);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.38 0.07 140);
-  --primary-foreground: oklch(0.97 0.02 85);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.45 0.03 60);
-  --accent: oklch(0.75 0.12 70);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --radius: 1rem;
+  --background: oklch(0.99 0.007 110);
+  --foreground: oklch(0.31 0.07 135);
+  --card: oklch(0.95 0 0);
+  --card-foreground: oklch(0.31 0.07 135);
+  --popover: oklch(0.99 0.007 110);
+  --popover-foreground: oklch(0.31 0.07 135);
+  --primary: oklch(0.31 0.07 135);
+  --primary-foreground: oklch(0.99 0.007 110);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.31 0.07 135);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.42 0.05 135);
+  --accent: oklch(0.93 0.14 128);
+  --accent-foreground: oklch(0.31 0.07 135);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.88 0.03 80);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.31 0.07 135 / 14%);
+  --input: oklch(0.31 0.07 135 / 20%);
+  --ring: oklch(0.31 0.07 135);
+  --forest: oklch(0.31 0.07 135);
+  --forest-foreground: oklch(0.99 0.007 110);
+  --lime: oklch(0.93 0.14 128);
+  --surface: oklch(0.95 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -152,7 +160,15 @@
   }
 
   body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+}
+
+@utility display-title {
+  font-weight: 330;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
 }
