@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves } from "lucide-react";
 import hero from "@/assets/bufalas-pasto.jpg";
@@ -124,6 +124,7 @@ function Index() {
   const [activeModule, setActiveModule] = useState<ModuleId>("pos-ordenha");
   const [savedMessage, setSavedMessage] = useState("");
   const [breedIndex, setBreedIndex] = useState(0);
+  const breedCarouselRef = useRef<HTMLDivElement>(null);
   const [buffaloPart, setBuffaloPart] = useState({
     key: "ubere",
     label: "Úbere e tetos",
@@ -148,6 +149,33 @@ function Index() {
   }, [history]);
 
   const active = useMemo(() => modules.find((item) => item.id === activeModule) ?? modules[0], [activeModule]);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setBreedIndex((current) => {
+        const next = (current + 1) % 4;
+        const carousel = breedCarouselRef.current;
+        const card = carousel?.children[next] as HTMLElement | undefined;
+        if (carousel && card) {
+          carousel.scrollTo({ left: card.offsetLeft - carousel.offsetLeft, behavior: "smooth" });
+        }
+        return next;
+      });
+    }, 4000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  function moveBreed(direction: number) {
+    setBreedIndex((current) => {
+      const next = (current + direction + 4) % 4;
+      const carousel = breedCarouselRef.current;
+      const card = carousel?.children[next] as HTMLElement | undefined;
+      if (carousel && card) {
+        carousel.scrollTo({ left: card.offsetLeft - carousel.offsetLeft, behavior: "smooth" });
+      }
+      return next;
+    });
+  }
 
   function toggleStep(moduleId: ModuleId, step: string) {
     setChecked((current) => ({
@@ -317,11 +345,11 @@ function Index() {
                 <p className="mt-2 max-w-2xl text-sm opacity-80">Deslize para o lado ou use as setas para conhecer cada raça.</p>
               </div>
               <div className="flex gap-2">
-                <button type="button" onClick={() => setBreedIndex((value) => (value + 3) % 4)} aria-label="Imagem anterior" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronLeft className="h-5 w-5" /></button>
-                <button type="button" onClick={() => setBreedIndex((value) => (value + 1) % 4)} aria-label="Próxima imagem" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronRight className="h-5 w-5" /></button>
+                <button type="button" onClick={() => moveBreed(-1)} aria-label="Imagem anterior" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronLeft className="h-5 w-5" /></button>
+                <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima imagem" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronRight className="h-5 w-5" /></button>
               </div>
             </div>
-            <div className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4">
+            <div ref={breedCarouselRef} onMouseEnter={() => undefined} className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4">
               {[
                 { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/B%C3%BAfalo_Murrah.JPG?width=1000", credit: "Foto: Paulo Roberto C M Jr. · CC BY 3.0" },
                 { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi%20buffalo%20in%20village.jpg?width=1000", credit: "Foto: Santosh Gore · CC BY-SA 4.0" },
