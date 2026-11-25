@@ -507,16 +507,16 @@ function Index() {
 
 
 
-      <section id="racas" className="scroll-mt-20 bg-forest text-forest-foreground">
+      <section id="racas" className="scroll-mt-20 bg-background text-foreground">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <div className="mt-10 overflow-hidden rounded-[2rem] border border-white/15 bg-[#101f1a] p-5 shadow-2xl md:p-8">
+          <div className="mt-10 overflow-hidden rounded-[2rem] border border-border bg-white p-5 shadow-2xl md:p-8">
             <div className="max-w-3xl">
-              <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Bubalinocultura no Brasil</p>
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Bubalinocultura no Brasil</p>
               <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Explore o mapa do rebanho bubalino</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/75 md:text-base">Clique em uma das cinco regiões coloridas para descobrir quantos búfalos existem, quais estados se destacam e curiosidades sobre a criação.</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">Clique em uma das cinco regiões coloridas para descobrir quantos búfalos existem, quais estados se destacam e curiosidades sobre a criação.</p>
             </div>
             <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="rounded-3xl bg-gradient-to-br from-[#172d26] to-[#0a1511] p-3 sm:p-5">
+              <div className="rounded-3xl bg-gradient-to-br from-[#f1f5f2] to-[#e8efe9] p-3 sm:p-5">
                 <svg viewBox="0 0 470 520" role="group" aria-label="Mapa ilustrativo do Brasil dividido em cinco regiões clicáveis" className="mx-auto block w-full max-w-[460px] overflow-visible">
                   <defs>
                     <filter id="region-shadow" x="-30%" y="-20%" width="170%" height="170%">
@@ -555,11 +555,11 @@ function Index() {
                     return <text key={region.name} x={x} y={y} textAnchor="middle" dominantBaseline="middle" fill="#101010" fontSize="13" fontWeight="900" pointerEvents="none">{region.name === "Centro-Oeste" ? "CENTRO-" : region.name.toUpperCase()}</text>;
                   })}
                   <text x="211" y="226" textAnchor="middle" fill="#101010" fontSize="12" fontWeight="900" pointerEvents="none">OESTE</text>
-                  <text x="235" y="510" textAnchor="middle" fill="#ffffff" opacity=".65" fontSize="10" letterSpacing="2">MAPA REGIONAL ILUSTRATIVO</text>
+                  <text x="235" y="510" textAnchor="middle" fill="#52665a" opacity=".8" fontSize="10" letterSpacing="2">MAPA REGIONAL ILUSTRATIVO</text>
                 </svg>
                 <div className="mt-2 flex flex-wrap justify-center gap-2">
                   {buffaloRegions.map((region) => (
-                    <button key={region.name} type="button" onClick={() => setSelectedRegion(region.name)} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition ${selectedRegion === region.name ? "border-white bg-white text-[#102019]" : "border-white/25 text-white hover:bg-white/10"}`}>
+                    <button key={region.name} type="button" onClick={() => setSelectedRegion(region.name)} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition ${selectedRegion === region.name ? "border-primary bg-primary text-white" : "border-border text-foreground hover:bg-surface"}`}>
                       <span className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: region.color }} />{region.name}
                     </button>
                   ))}
@@ -597,24 +597,24 @@ function Index() {
                 );
               })()}
             </div>
-            <p className="mt-4 text-center text-xs text-white/55">O desenho do mapa é esquemático: as áreas representam as cinco grandes regiões, não os limites exatos dos estados.</p>
-            <p className="mt-2 text-center text-xs text-white/60">Fonte: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
+            <p className="mt-4 text-center text-xs text-muted-foreground">O desenho do mapa é esquemático: as áreas representam as cinco grandes regiões, não os limites exatos dos estados.</p>
+            <p className="mt-2 text-center text-xs text-muted-foreground">Fonte: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-primary">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
           </div>
 
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Conheça o rebanho</p>
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Conheça o rebanho</p>
           <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Explore uma búfala e conheça os búfalos.</h2>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed opacity-90">Passe pelas imagens para conhecer as principais raças criadas no Brasil e um pouco da rotina desses animais. Depois, explore a imagem interativa e descubra partes importantes do corpo da búfala.</p>
 
           <div className="mt-10">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="text-sm font-bold uppercase tracking-wider text-lime">Galeria de imagens</p>
+                <p className="text-sm font-bold uppercase tracking-wider text-primary">Galeria de imagens</p>
                 <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Conheça as raças bubalinas</h3>
                 <p className="mt-2 max-w-2xl text-sm opacity-80">Deslize para o lado ou use as setas para conhecer cada raça.</p>
               </div>
               <div className="flex gap-2">
-                <button type="button" onClick={() => moveBreed(-1)} aria-label="Imagem anterior" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronLeft className="h-5 w-5" /></button>
-                <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima imagem" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronRight className="h-5 w-5" /></button>
+                <button type="button" onClick={() => moveBreed(-1)} aria-label="Imagem anterior" className="rounded-full border border-border p-3 transition hover:bg-surface"><ChevronLeft className="h-5 w-5" /></button>
+                <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima imagem" className="rounded-full border border-border p-3 transition hover:bg-surface"><ChevronRight className="h-5 w-5" /></button>
               </div>
             </div>
             <div
@@ -636,7 +636,7 @@ function Index() {
                 { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_01.jpg?width=1800", credit: "Foto: Bernard Gagnon · Wikimedia Commons" },
                 { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Tem chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Philippine_water_buffalo_(carabao).JPG?width=1600", credit: "Foto: Pinoydiscus · CC BY-SA 3.0" },
               ].map((breed, index) => (
-                <article key={breed.name} className={`w-[82vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-2xl bg-background text-foreground shadow-lg transition ${breedIndex === index ? "ring-4 ring-lime" : ""}`}>
+                <article key={breed.name} className={`w-[82vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-2xl bg-background text-foreground shadow-lg transition ${breedIndex === index ? "ring-4 ring-primary" : ""}`}>
                   <img src={breed.image} alt={`Búfalo da raça ${breed.name}`} loading="lazy" className="h-56 w-full object-cover" />
                   <div className="p-5">
                     <p className="text-xs font-bold uppercase tracking-wider text-primary">Raça bubalina</p>
@@ -655,7 +655,7 @@ function Index() {
                   onClick={() => moveBreed(index - breedIndex)}
                   aria-label={`Ir para a raça ${index + 1}`}
                   aria-current={breedIndex === index ? "true" : undefined}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${breedIndex === index ? "w-8 bg-lime" : "w-2.5 bg-white/40 hover:bg-white/70"}`}
+                  className={`h-2.5 rounded-full transition-all duration-500 ${breedIndex === index ? "w-8 bg-lime" : "w-2.5 bg-border hover:bg-primary/40"}`}
                 />
               ))}
               <span className="ml-2 text-xs opacity-75">{breedPaused ? "Pausado" : "Passagem automática"}</span>
@@ -663,11 +663,11 @@ function Index() {
             <p className="text-xs opacity-70">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
           </div>
 
-          <div className="mt-16 rounded-[2rem] border border-white/15 bg-[#101713] p-5 shadow-2xl md:p-8">
+          <div className="mt-16 rounded-[2rem] border border-border bg-surface p-5 shadow-2xl md:p-8">
             <div className="mx-auto max-w-4xl text-center">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-lime">Sala de documentários</p>
-              <h3 className="display-title mt-3 text-2xl font-semibold text-white md:text-4xl">Uma pausa para conhecer mais sobre os búfalos.</h3>
-              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">Imagine que você abriu o YouTube para pesquisar. Encontramos um vídeo sobre a cadeia produtiva bubalina no Pará para você assistir aqui mesmo.</p>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-primary">Sala de documentários</p>
+              <h3 className="display-title mt-3 text-2xl font-semibold text-foreground md:text-4xl">Uma pausa para conhecer mais sobre os búfalos.</h3>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">Imagine que você abriu o YouTube para pesquisar. Encontramos um vídeo sobre a cadeia produtiva bubalina no Pará para você assistir aqui mesmo.</p>
             </div>
             <div className="relative mx-auto mt-7 max-w-4xl rounded-[1.6rem] border-[7px] border-[#252b28] bg-[#080b09] p-2 shadow-[0_22px_60px_rgba(0,0,0,.5)] md:border-[10px] md:p-3">
               <div className="mb-3 flex items-center gap-2 rounded-xl bg-white px-3 py-2.5 text-[#202124] shadow-inner">
@@ -694,18 +694,18 @@ function Index() {
                 </div>
               </div>
               <div className="mx-auto mt-3 h-2 w-24 rounded-full bg-[#454c47]" />
-              <p className="mt-3 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">Manejo em Dia · Conteúdo educativo</p>
+              <p className="mt-3 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">Manejo em Dia · Conteúdo educativo</p>
             </div>
-            <div className="mx-auto mt-5 flex max-w-4xl flex-wrap items-center justify-between gap-3 text-sm text-white/75">
-              <div><p className="font-semibold text-white">Cadeia Produtiva Bubalina no Pará</p><p className="mt-1 text-xs text-white/55">Reportagem sobre a criação e a produção bubalina na região Norte.</p></div>
-              <a href="https://www.youtube.com/watch?v=Exf4krTRICo" target="_blank" rel="noreferrer" className="rounded-full border border-white/25 px-4 py-2 text-xs font-semibold transition hover:bg-white/10">Abrir no YouTube ↗</a>
+            <div className="mx-auto mt-5 flex max-w-4xl flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
+              <div><p className="font-semibold text-foreground">Cadeia Produtiva Bubalina no Pará</p><p className="mt-1 text-xs text-muted-foreground">Reportagem sobre a criação e a produção bubalina na região Norte.</p></div>
+              <a href="https://www.youtube.com/watch?v=Exf4krTRICo" target="_blank" rel="noreferrer" className="rounded-full border border-border px-4 py-2 text-xs font-semibold text-foreground transition hover:bg-surface">Abrir no YouTube ↗</a>
             </div>
             <style>{`@keyframes tvMouse { 0%, 100% { transform: translate(-34px, 10px) rotate(-8deg); } 45% { transform: translate(0, -2px) rotate(4deg); } 70% { transform: translate(18px, 5px) rotate(-2deg); } }`}</style>
           </div>
 
           <div className="mt-16 grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
-              <p className="text-sm font-bold uppercase tracking-wider text-lime">Explore e aprenda</p>
+              <p className="text-sm font-bold uppercase tracking-wider text-primary">Explore e aprenda</p>
               <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Conheça o corpo de uma búfala</h3>
               <p className="mt-3 leading-relaxed opacity-90">Toque nos pontos destacados na imagem. Cada ponto abre uma explicação simples sobre uma parte do animal e os cuidados relacionados ao manejo.</p>
               <div className="mt-6 flex flex-wrap gap-2">
@@ -715,7 +715,7 @@ function Index() {
                   { key: "ubere", label: "Úbere e tetos", description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade." },
                   { key: "cascos", label: "Pernas e cascos", description: "Observe a caminhada, a limpeza e possíveis rachaduras ou lesões. Dificuldade para andar ou apoiar uma das patas merece avaliação." },
                 ].map((part) => (
-                  <button key={part.key} type="button" onClick={() => setBuffaloPart(part)} className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${buffaloPart.key === part.key ? "border-lime bg-lime text-forest" : "border-white/30 hover:bg-white/10"}`}>{part.label}</button>
+                  <button key={part.key} type="button" onClick={() => setBuffaloPart(part)} className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${buffaloPart.key === part.key ? "border-primary bg-primary text-white" : "border-border hover:bg-surface"}`}>{part.label}</button>
                 ))}
               </div>
               <div className="mt-5 rounded-2xl bg-background p-5 text-foreground" aria-live="polite">
@@ -725,25 +725,25 @@ function Index() {
                 <button type="button" onClick={() => speak(`${buffaloPart.label}. ${buffaloPart.description}`)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary"><Headphones className="h-4 w-4" /> Ouvir explicação</button>
               </div>
             </div>
-            <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-3">
+            <div className="relative overflow-hidden rounded-3xl border border-border bg-surface p-3">
               <img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_Murrah_buffalo.jpg?width=1800" alt="Búfala Murrah em vista lateral, para observar as partes do corpo" loading="lazy" className="aspect-[4/5] w-full rounded-2xl object-cover" />
               <span className="absolute left-5 top-5 rounded-full bg-background/90 px-3 py-2 text-xs font-bold text-foreground">Imagem educativa interativa</span>
               <div className="absolute left-[57%] top-[27%]">
-                <button type="button" onClick={() => setBuffaloPart({ key: "cabeca", label: "Cabeça e chifres", description: "A cabeça e o formato dos chifres ajudam a observar características físicas e diferenças entre as raças. A aproximação deve ser feita com calma e segurança, sem ficar na área de alcance dos chifres." })} aria-label="Explorar cabeça e chifres" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+                <button type="button" onClick={() => setBuffaloPart({ key: "cabeca", label: "Cabeça e chifres", description: "A cabeça e o formato dos chifres ajudam a observar características físicas e diferenças entre as raças. A aproximação deve ser feita com calma e segurança, sem ficar na área de alcance dos chifres." })} aria-label="Explorar cabeça e chifres" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-primary/30" />
               </div>
               <div className="absolute left-[48%] top-[49%]">
-                <button type="button" onClick={() => setBuffaloPart({ key: "dorso", label: "Dorso e corpo", description: "Observe o estado corporal, a postura e a presença de ferimentos ou alterações. Acompanhar essas condições ajuda a perceber mudanças na saúde e no bem-estar." })} aria-label="Explorar dorso e corpo" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+                <button type="button" onClick={() => setBuffaloPart({ key: "dorso", label: "Dorso e corpo", description: "Observe o estado corporal, a postura e a presença de ferimentos ou alterações. Acompanhar essas condições ajuda a perceber mudanças na saúde e no bem-estar." })} aria-label="Explorar dorso e corpo" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-primary/30" />
               </div>
               <div className="absolute left-[36%] top-[72%]">
-                <button type="button" onClick={() => setBuffaloPart({ key: "ubere", label: "Úbere e tetos", description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade." })} aria-label="Explorar úbere e tetos" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+                <button type="button" onClick={() => setBuffaloPart({ key: "ubere", label: "Úbere e tetos", description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade." })} aria-label="Explorar úbere e tetos" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-primary/30" />
               </div>
               <div className="absolute left-[67%] top-[79%]">
-                <button type="button" onClick={() => setBuffaloPart({ key: "cascos", label: "Pernas e cascos", description: "Observe a caminhada, a limpeza e possíveis rachaduras ou lesões. Dificuldade para andar ou apoiar uma das patas merece avaliação." })} aria-label="Explorar pernas e cascos" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-lime/30" />
+                <button type="button" onClick={() => setBuffaloPart({ key: "cascos", label: "Pernas e cascos", description: "Observe a caminhada, a limpeza e possíveis rachaduras ou lesões. Dificuldade para andar ou apoiar uma das patas merece avaliação." })} aria-label="Explorar pernas e cascos" className="h-5 w-5 rounded-full border-2 border-white bg-lime shadow-lg ring-4 ring-primary/30" />
               </div>
               <p className="px-2 py-3 text-center text-xs opacity-75">Selecione um dos pontos sobre a imagem ou use os botões ao lado.</p>
             </div>
           </div>
-          <div className="mt-10 rounded-2xl border border-white/20 bg-white/10 p-5 text-sm leading-relaxed">
+          <div className="mt-10 rounded-2xl border border-border bg-surface p-5 text-sm leading-relaxed">
             <strong>Sobre o recurso:</strong> esta primeira versão usa uma fotografia com pontos interativos, não um modelo 3D giratório. Assim, o conteúdo já funciona em celular e computador. Um modelo 3D real poderá ser integrado depois, quando tivermos um arquivo próprio em formato GLB ou GLTF.
           </div>
         </div>
