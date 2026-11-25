@@ -457,10 +457,6 @@ function Index() {
 
       <section id="racas" className="scroll-mt-20 bg-forest text-forest-foreground">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Conheça o rebanho</p>
-          <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Explore uma búfala e conheça os búfalos.</h2>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed opacity-90">Passe pelas imagens para conhecer as principais raças criadas no Brasil e um pouco da rotina desses animais. Depois, explore a imagem interativa e descubra partes importantes do corpo da búfala.</p>
-
           <div className="mt-10 overflow-hidden rounded-[2rem] border border-white/15 bg-[#101f1a] p-5 shadow-2xl md:p-8">
             <div className="max-w-3xl">
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Bubalinocultura no Brasil</p>
@@ -552,6 +548,10 @@ function Index() {
             <p className="mt-4 text-center text-xs text-white/55">O desenho do mapa é esquemático: as áreas representam as cinco grandes regiões, não os limites exatos dos estados.</p>
             <p className="mt-2 text-center text-xs text-white/60">Fonte: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
           </div>
+
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Conheça o rebanho</p>
+          <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Explore uma búfala e conheça os búfalos.</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed opacity-90">Passe pelas imagens para conhecer as principais raças criadas no Brasil e um pouco da rotina desses animais. Depois, explore a imagem interativa e descubra partes importantes do corpo da búfala.</p>
 
           <div className="mt-10">
             <div className="flex flex-wrap items-end justify-between gap-4">
