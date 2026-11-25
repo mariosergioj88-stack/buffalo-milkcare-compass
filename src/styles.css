@@ -30,8 +30,8 @@
  */
 
 @theme inline {
-  --font-display: 'Verdana', 'Geneva', 'DejaVu Sans', sans-serif;
-  --font-sans: 'Verdana', 'Geneva', 'DejaVu Sans', sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --color-forest: var(--forest);
   --color-forest-foreground: var(--forest-foreground);
   --color-lime: var(--lime);
