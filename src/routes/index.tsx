@@ -146,6 +146,7 @@ const dictionaryTerms = [
 ] as const;
 
 function Index() {
+  const [clickToSpeak, setClickToSpeak] = useState(false);
   const [checked, setChecked] = useState<Record<ModuleId, string[]>>({
     "pos-ordenha": [], racao: [], "pre-ordenha": [],
   });
@@ -174,6 +175,17 @@ function Index() {
     label: "Úbere e tetos",
     description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade.",
   });
+
+  useEffect(() => {
+    // Carrega o widget oficial do VLibras uma única vez nesta página.
+    if (!document.querySelector('script[data-vlibras-widget="true"]')) {
+      const script = document.createElement("script");
+      script.src = "https://vlibras.gov.br/app/vlibras-plugin.js";
+      script.async = true;
+      script.dataset.vlibrasWidget = "true";
+      document.body.appendChild(script);
+    }
+  }, []);
 
   useEffect(() => {
     try {
@@ -276,7 +288,7 @@ function Index() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground" onClick={handleSpeakClick}>
+    <div className="min-h-screen bg-background text-foreground" onClick={clickToSpeak ? handleSpeakClick : undefined}>
       <nav className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 py-3">
           <a href="#inicio" className="flex min-w-0 items-center gap-3">
@@ -318,8 +330,14 @@ function Index() {
         </div>
       </nav>
 
-      <div className="border-b border-primary/20 bg-[#f0f8f1] px-5 py-3 text-center text-sm font-semibold text-[#244b30]" role="status">
-        <span className="inline-flex items-center justify-center gap-2"><Headphones className="h-4 w-4 shrink-0" /> Quer ouvir? Clique em qualquer frase ou título para escutar a leitura.</span>
+      <div className="border-b border-primary/20 bg-[#f0f8f1] px-5 py-3 text-center text-sm text-[#244b30]">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-3">
+          <span className="inline-flex items-center gap-2 font-semibold"><Headphones className="h-4 w-4 shrink-0" /> Recurso de áudio:</span>
+          <span>{clickToSpeak ? "Clique em uma frase para ouvir a leitura." : "Ative o botão para ouvir as frases do site."}</span>
+          <button type="button" aria-pressed={clickToSpeak} onClick={() => { setClickToSpeak((enabled) => !enabled); window.speechSynthesis?.cancel(); }} className={`rounded-full px-4 py-2 text-xs font-bold transition ${clickToSpeak ? "bg-[#245b35] text-white" : "border border-[#245b35] bg-white text-[#245b35] hover:bg-[#e5f1e7]"}`}>
+            {clickToSpeak ? "Desativar leitura" : "Ativar leitura"}
+          </button>
+        </div>
       </div>
 
       <header id="inicio" className="relative isolate flex min-h-[min(900px,100svh)] items-center justify-center overflow-hidden bg-[#101812] px-5 py-12 text-center text-white">
@@ -1111,6 +1129,13 @@ function Index() {
           <p>Este histórico é local: ele não é enviado para a internet nem compartilhado automaticamente com outras pessoas. Para usar em outro aparelho, será necessário registrar as informações novamente.</p>
         </div>
       </section>
+
+      <div vw="" className="enabled" aria-label="Acessibilidade em Libras">
+        <div vw-access-button="" className="active" />
+        <div vw-plugin-wrapper="">
+          <div vw-plugin-top-wrapper="" />
+        </div>
+      </div>
 
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-muted-foreground md:flex-row md:justify-between">
