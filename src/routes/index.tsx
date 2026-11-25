@@ -42,7 +42,7 @@ function Index() {
       <nav className="sticky top-0 z-20 border-b border-border bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
           <a href="#inicio" className="flex items-center gap-3 font-medium">
-            <img src="/favicon.svg" alt="" className="h-9 w-9" />
+            <img src="/favicon.png" alt="" className="h-9 w-9" />
             Búfalas Leiteiras
           </a>
           <div className="hidden gap-8 text-[15px] md:flex">

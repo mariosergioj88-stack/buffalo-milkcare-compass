@@ -30,8 +30,8 @@
  */
 
 @theme inline {
-  --font-display: 'Inter', sans-serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Verdana', 'Geneva', 'DejaVu Sans', sans-serif;
+  --font-sans: 'Verdana', 'Geneva', 'DejaVu Sans', sans-serif;
   --color-forest: var(--forest);
   --color-forest-foreground: var(--forest-foreground);
   --color-lime: var(--lime);
@@ -168,7 +168,7 @@
 }
 
 @utility display-title {
-  font-weight: 330;
-  letter-spacing: -0.035em;
-  line-height: 1.02;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
 }
