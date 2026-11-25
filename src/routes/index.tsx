@@ -233,10 +233,9 @@ function Index() {
           loop
           playsInline
           preload="metadata"
-          poster="https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=1800"
-          aria-label="Vídeo de búfalos em ambiente natural"
+          aria-label="Rebanho de búfalos-d'água pastando ao ar livre"
         >
-          <source src="https://videos.pexels.com/video-files/12775713/12775713_1920_1080_25fps.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/29712016/12775713_1920_1080_25fps.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/75" />
         <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
@@ -245,15 +244,7 @@ function Index() {
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg md:text-xl">
             Um guia prático para transformar recomendações da cartilha em ações na propriedade.
           </p>
-          <div className="relative mt-3 flex w-full items-center justify-center">
-            <div className="pointer-events-none absolute bottom-2 h-10 w-2/3 max-w-md rounded-[50%] bg-black/55 blur-2xl" />
-            <img
-              src="https://cdn.rawpng.com/1041377195.webp"
-              alt="Búfalo-d'água em ilustração tridimensional"
-              fetchPriority="high"
-              className="relative z-10 h-[34vh] min-h-[230px] max-h-[430px] w-full max-w-[min(92vw,620px)] object-contain drop-shadow-[0_24px_35px_rgba(0,0,0,.65)] sm:h-[42vh] md:h-[48vh]"
-            />
-          </div>
+          <div className="mt-4 h-[24vh] min-h-[110px] sm:h-[30vh]" aria-hidden="true" />
           <a href="#rotina" className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-lg transition hover:scale-[1.02] hover:opacity-95 sm:text-base">
             Escolher uma atividade <ArrowRight className="h-5 w-5" />
           </a>
