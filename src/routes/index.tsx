@@ -428,16 +428,16 @@ function Index() {
             <p className="mt-2 text-center text-xs text-white/60">Mapa: <a href="https://commons.wikimedia.org/wiki/File:Brazil_Labelled_Map.svg" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">Wikimedia Commons</a> · Dados: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
           </div>
 
-          <div className="mt-10">
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="text-sm font-bold uppercase tracking-wider text-lime">Galeria de imagens</p>
-                <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Conheça as raças bubalinas</h3>
-                <p className="mt-2 max-w-2xl text-sm opacity-80">Deslize para o lado ou use as setas para conhecer cada raça.</p>
+          <div className="mt-14">
+            <div className="flex flex-wrap items-end justify-between gap-5">
+              <div className="max-w-2xl">
+                <span className="inline-flex items-center gap-2 rounded-full border border-lime/30 bg-lime/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-lime"><Beef className="h-4 w-4" /> Universo bubalino</span>
+                <h3 className="display-title mt-4 text-3xl font-bold md:text-4xl">Conheça as raças de búfalos</h3>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/75 md:text-base">Cada raça tem características próprias. Explore as imagens, observe os animais e descubra o que diferencia cada uma.</p>
               </div>
-              <div className="flex gap-2">
-                <button type="button" onClick={() => moveBreed(-1)} aria-label="Imagem anterior" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronLeft className="h-5 w-5" /></button>
-                <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima imagem" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronRight className="h-5 w-5" /></button>
+              <div className="flex items-center gap-2">
+                <button type="button" onClick={() => moveBreed(-1)} aria-label="Raça anterior" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-white/5 text-white transition hover:border-lime hover:bg-lime hover:text-[#142018]"><ChevronLeft className="h-5 w-5" /></button>
+                <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima raça" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-white/5 text-white transition hover:border-lime hover:bg-lime hover:text-[#142018]"><ChevronRight className="h-5 w-5" /></button>
               </div>
             </div>
             <div
@@ -451,39 +451,41 @@ function Index() {
               onTouchStart={() => setBreedPaused(true)}
               onTouchEnd={() => setBreedPaused(false)}
               aria-label="Carrossel automático de raças bubalinas"
-              className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4"
+              className="mt-7 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6 pr-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {[
-                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Murrah_buffalo_-_01.jpg?width=1800", credit: "Foto: Oleg Yunakov · Wikimedia Commons · CC BY-SA 4.0" },
-                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi_buffalo_in_village.jpg?width=1800", credit: "Foto: Santosh Gore · Wikimedia Commons · CC BY-SA 4.0" },
-                { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_01.jpg?width=1800", credit: "Foto: Bernard Gagnon · Wikimedia Commons" },
-                { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Tem chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Philippine_water_buffalo_(carabao).JPG?width=1600", credit: "Foto: Pinoydiscus · CC BY-SA 3.0" },
+                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Murrah_buffalo_-_01.jpg?width=1800", credit: "Oleg Yunakov · Wikimedia Commons" },
+                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi_buffalo_in_village.jpg?width=1800", credit: "Santosh Gore · Wikimedia Commons" },
+                { name: "Mediterrânea", detail: "Raça de origem italiana, conhecida pela aptidão leiteira e também utilizada na produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_01.jpg?width=1800", credit: "Bernard Gagnon · Wikimedia Commons" },
+                { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Apresenta chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Philippine_water_buffalo_(carabao).JPG?width=1600", credit: "Pinoydiscus · Wikimedia Commons" },
               ].map((breed, index) => (
-                <article key={breed.name} className={`w-[82vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-2xl bg-background text-foreground shadow-lg transition ${breedIndex === index ? "ring-4 ring-lime" : ""}`}>
-                  <img src={breed.image} alt={`Búfalo da raça ${breed.name}`} loading="lazy" className="h-56 w-full object-cover" />
-                  <div className="p-5">
-                    <p className="text-xs font-bold uppercase tracking-wider text-primary">Raça bubalina</p>
-                    <h4 className="mt-2 text-2xl font-semibold">{breed.name}</h4>
-                    <p className="mt-2 min-h-20 text-sm leading-relaxed text-muted-foreground">{breed.detail}</p>
-                    <p className="mt-4 text-xs text-muted-foreground">{breed.credit}</p>
+                <article key={breed.name} className={`group relative h-[430px] w-[82vw] max-w-[470px] shrink-0 snap-start overflow-hidden rounded-[2rem] border border-white/15 bg-[#202a22] shadow-[0_18px_55px_rgba(0,0,0,.3)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_24px_65px_rgba(0,0,0,.45)] md:h-[500px] md:w-[44vw] ${breedIndex === index ? "ring-2 ring-lime ring-offset-4 ring-offset-[#101713]" : ""}`}>
+                  <img src={breed.image} alt={`Búfalo da raça ${breed.name}`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07100b] via-[#07100b]/25 to-black/5" />
+                  <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-white/25 bg-black/35 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md">
+                    <span className="h-2 w-2 rounded-full bg-lime" /> Raça bubalina
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-8">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-lime">Conheça e compare</p>
+                    <h4 className="display-title mt-2 text-3xl font-bold md:text-4xl">{breed.name}</h4>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 md:text-base">{breed.detail}</p>
+                    <div className="mt-5 flex items-center justify-between gap-3 border-t border-white/20 pt-4">
+                      <span className="text-[10px] text-white/65">Foto: {breed.credit}</span>
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime text-[#142018] transition group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
+                    </div>
                   </div>
                 </article>
               ))}
             </div>
-            <div className="mt-2 flex items-center justify-center gap-2" aria-label="Selecionar raça">
-              {[0, 1, 2, 3].map((index) => (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => moveBreed(index - breedIndex)}
-                  aria-label={`Ir para a raça ${index + 1}`}
-                  aria-current={breedIndex === index ? "true" : undefined}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${breedIndex === index ? "w-8 bg-lime" : "w-2.5 bg-white/40 hover:bg-white/70"}`}
-                />
-              ))}
-              <span className="ml-2 text-xs opacity-75">{breedPaused ? "Pausado" : "Passagem automática"}</span>
+            <div className="mt-1 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2" aria-label="Selecionar raça">
+                {[0, 1, 2, 3].map((index) => (
+                  <button key={index} type="button" onClick={() => moveBreed(index - breedIndex)} aria-label={`Ir para a raça ${index + 1}`} aria-current={breedIndex === index ? "true" : undefined} className={`h-2 rounded-full transition-all duration-500 ${breedIndex === index ? "w-9 bg-lime" : "w-2.5 bg-white/35 hover:bg-white/70"}`} />
+                ))}
+              </div>
+              <span className="text-xs text-white/60">{breedPaused ? "Carrossel pausado" : "Deslize para explorar · passagem automática"}</span>
             </div>
-            <p className="text-xs opacity-70">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
+            <p className="mt-4 text-xs leading-relaxed text-white/55">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
           </div>
 
           <div className="mt-16 rounded-[2rem] border border-white/15 bg-[#101713] p-5 shadow-2xl md:p-8">
