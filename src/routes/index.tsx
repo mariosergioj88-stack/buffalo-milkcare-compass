@@ -9,9 +9,9 @@ import racao from "@/assets/racao-armazenada.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Búfalas Leiteiras — Guia de Manejo" },
+      { title: "Manejo em Dia — Cuidados na propriedade" },
       { name: "description", content: "Orientações práticas e registro da rotina de manejo de búfalas leiteiras." },
-      { property: "og:title", content: "Búfalas Leiteiras — Guia de Manejo" },
+      { property: "og:title", content: "Manejo em Dia — Cuidados na propriedade" },
       { property: "og:description", content: "Boas práticas na rotina de criação e produção de leite." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -97,16 +97,6 @@ const modules: {
   },
 ];
 
-const temas = [
-  ["Manejo das búfalas", "Mantenha uma rotina tranquila, sem gritos ou agressões. Ofereça sombra, água limpa e espaço adequado para os animais."],
-  ["Cuidados com os bezerros", "Garanta o fornecimento de colostro nas primeiras horas de vida, umbigo limpo e seco e acompanhamento do desenvolvimento."],
-  ["Alimentação", "Ofereça pastagem de qualidade, suplementação conforme a necessidade dos animais, sal mineral e água limpa."],
-  ["Prevenção da mastite", "Observe o úbere e o leite diariamente. Faça os testes indicados e procure orientação veterinária ao notar alterações."],
-  ["Vacinação e sanidade", "Siga o calendário sanitário da região com orientação veterinária. Registre vacinas, tratamentos e períodos de carência."],
-  ["Qualidade do leite", "Use equipamentos limpos, resfrie o leite rapidamente e mantenha o armazenamento e o transporte nas condições exigidas."],
-  ["Descarte dos dejetos", "Armazene e trate os dejetos em local apropriado, longe de rios e poços, seguindo a orientação ambiental."],
-];
-
 function speak(text: string) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
@@ -180,11 +170,10 @@ function Index() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
           <a href="#inicio" className="flex items-center gap-3 font-semibold">
             <img src="/favicon.png" alt="" className="h-10 w-10 object-contain" />
-            <span>Búfalas Leiteiras</span>
+            <span>Manejo em Dia</span>
           </a>
           <div className="hidden items-center gap-7 text-sm md:flex">
             <a href="#rotina" className="hover:opacity-70">Rotina prática</a>
-            <a href="#guia" className="hover:opacity-70">Outros cuidados</a>
             <a href="#historico" className="hover:opacity-70">Histórico</a>
           </div>
           <a href="#rotina" className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Começar</a>
@@ -194,11 +183,11 @@ function Index() {
       <header id="inicio" className="mx-auto max-w-6xl px-5 pb-16 pt-14 md:pb-24 md:pt-20">
         <div className="grid items-center gap-10 md:grid-cols-[1fr_0.95fr]">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Guia de rotina no campo</p>
-            <h1 className="display-title mt-5 text-4xl md:text-6xl">Cuidar bem das búfalas começa na rotina.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">Orientações simples para o manejo diário, a higiene da ordenha e o cuidado com a alimentação. Marque as tarefas e registre o que foi feito.</p>
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Orientação prática para o dia a dia</p>
+            <h1 className="display-title mt-5 text-4xl md:text-6xl">MANEJO EM DIA</h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">Aprenda, acompanhe e registre três cuidados importantes na produção de leite de búfalas.</p>
             <a href="#rotina" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-4 font-semibold text-primary-foreground hover:opacity-90">
-              Acessar atividades <ArrowRight className="h-5 w-5" />
+              Escolher uma atividade <ArrowRight className="h-5 w-5" />
             </a>
           </div>
           <img src={hero} alt="Búfalas em área de pastagem" width={1600} height={1008} className="aspect-[5/4] w-full rounded-3xl object-cover" />
@@ -285,23 +274,6 @@ function Index() {
         </div>
       </section>
 
-      <section id="guia" className="scroll-mt-20 bg-forest text-forest-foreground">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Informação para o trabalho</p>
-          <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Outros cuidados para manter o rebanho saudável.</h2>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
-            {temas.map(([title, description], index) => (
-              <article key={title} className="rounded-2xl border border-forest-foreground/15 p-6">
-                <span className="text-sm font-bold text-lime">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 text-xl font-semibold">{title}</h3>
-                <p className="mt-2 leading-relaxed opacity-85">{description}</p>
-                <button onClick={() => speak(`${title}. ${description}`)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-lime"><Headphones className="h-4 w-4" /> Ouvir explicação</button>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="historico" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-16 md:py-24">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -340,7 +312,7 @@ function Index() {
 
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-muted-foreground md:flex-row md:justify-between">
-          <span className="font-semibold text-foreground">Búfalas Leiteiras</span>
+          <span className="font-semibold text-foreground">Manejo em Dia</span>
           <span>Guia prático de manejo e rotina de trabalho</span>
         </div>
       </footer>
