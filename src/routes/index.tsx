@@ -286,81 +286,19 @@ function Index() {
         </div>
       </header>
 
-      <section id="dicionario" className="scroll-mt-20 bg-background py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="grid gap-7 md:grid-cols-[1fr_0.85fr] md:items-end">
-            <div>
-              <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-primary"><BookOpen className="h-4 w-4" /> Palavras do dia a dia</p>
-              <h2 className="display-title mt-3 text-3xl md:text-4xl">Dicionário do manejo</h2>
-              <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">Veja o que significam as palavras mais difíceis usadas nas orientações sobre os búfalos. Explicações simples e opção para ouvir.</p>
-            </div>
-            <label className="relative block">
-              <span className="sr-only">Pesquisar termo</span>
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="search"
-                value={dictionarySearch}
-                onChange={(event) => setDictionarySearch(event.target.value)}
-                placeholder="Pesquisar palavra..."
-                className="w-full rounded-2xl border border-border bg-surface py-4 pl-12 pr-4 text-base outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-          </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {dictionaryTerms.filter((entry) => `${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))).map((entry) => (
-              <article key={entry.term} className="rounded-2xl border border-border bg-surface p-5 transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <h3 className="text-lg font-bold text-primary">{entry.term}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/85">{entry.meaning}</p>
-                <button type="button" onClick={() => speak(`${entry.term}. ${entry.meaning}`)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-                  <Headphones className="h-4 w-4" /> Ouvir significado
-                </button>
-              </article>
-            ))}
-            {dictionaryTerms.every((entry) => !`${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))) && (
-              <p className="rounded-xl border border-dashed border-border p-5 text-center text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">Nenhuma palavra encontrada. Tente outro termo.</p>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section id="alunos-respondem" className="scroll-mt-20 bg-surface py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Dúvidas sobre o manejo</p>
-            <h2 className="display-title mt-3 text-3xl md:text-4xl">Alunos respondem</h2>
-            <p className="mt-3 leading-relaxed text-muted-foreground">Perguntas e respostas preparadas pelos alunos sobre os cuidados com búfalas leiteiras e a rotina da propriedade. Clique em uma pergunta para ver a resposta.</p>
-          </div>
-          <div className="mt-8 grid gap-3 md:grid-cols-2">
-            {[
-              { question: "Por que devemos fazer a higiene dos tetos antes da ordenha?", answer: "Porque a sujeira nos tetos pode comprometer a higiene durante a ordenha e a qualidade do leite. A rotina inclui limpeza, pré-dipping e secagem individual, conforme o produto utilizado." },
-              { question: "O que é pré-dipping?", answer: "É a aplicação de um produto próprio para higienizar os tetos antes da ordenha. É importante respeitar as orientações e o tempo de ação indicados pelo fabricante." },
-              { question: "Por que devemos secar cada teto com papel-toalha individual?", answer: "Para evitar levar sujeira de um teto ou animal para outro. Não se deve usar o mesmo papel em vários animais." },
-              { question: "O que devemos observar nos primeiros jatos de leite?", answer: "Devemos observar se há alterações no leite. Se notar algo diferente, o animal precisa ser avaliado e a orientação técnica da propriedade deve ser seguida." },
-              { question: "Por que os sacos de ração não devem ficar diretamente no chão?", answer: "Porque podem absorver umidade e ficar mais expostos à sujeira e às pragas. O ideal é armazená-los sobre paletes ou estrados." },
-              { question: "Como deve ser o local de armazenamento da ração e dos farelos?", answer: "Deve ser seco, limpo e ventilado, com os sacos afastados do chão e das paredes e protegido contra roedores e insetos." },
-              { question: "O que fazer se encontrar ração úmida, mofada ou com embalagem danificada?", answer: "Separe esse alimento e não o ofereça aos animais até receber orientação técnica. Também confira a validade e as condições das embalagens." },
-              { question: "Por que acompanhar a amamentação dos bezerros depois da ordenha?", answer: "Para observar se cada bezerro consegue mamar na própria mãe e identificar animais com dificuldade ou desconforto." },
-              { question: "Quanto tempo os animais permanecem nos piquetes durante a rotina de amamentação apresentada?", answer: "A orientação do material é manter os animais nos piquetes por cerca de 20 a 30 minutos, observando se os bezerros mamaram." },
-              { question: "O que é pós-dipping e quando ele é feito?", answer: "É a aplicação de um produto nos tetos após a ordenha, como parte dos cuidados de higiene e proteção." },
-            ].map((item, index) => (
-              <details key={item.question} className="group rounded-2xl border border-border bg-background p-5 open:border-primary/50 open:shadow-sm">
-                <summary className="flex cursor-pointer list-none items-start gap-3 font-semibold leading-relaxed marker:hidden">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">{index + 1}</span>
-                  <span className="flex-1">{item.question}</span>
-                  <span className="text-xl text-primary transition-transform group-open:rotate-45">+</span>
-                </summary>
-                <p className="ml-10 mt-4 border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
-                <button type="button" onClick={() => speak(`${item.question}. ${item.answer}`)} className="ml-10 mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
-                  <Headphones className="h-4 w-4" /> Ouvir resposta
-                </button>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="rotina" className="scroll-mt-20 bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-5">
+          <figure className="mb-10 overflow-hidden rounded-3xl border border-border bg-background shadow-sm">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Milking_the_Buffalo_%2835403227412%29.jpg"
+              alt="Ordenha manual de uma búfala em uma propriedade rural"
+              className="h-64 w-full object-cover object-center sm:h-80 md:h-[26rem]"
+              loading="lazy"
+            />
+            <figcaption className="px-4 py-2 text-xs text-muted-foreground">
+              Ordenha de búfala. Foto: Mike Prince (Wikimedia Commons), licença CC BY 2.0.
+            </figcaption>
+          </figure>
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Aprender e registrar</p>
             <h2 className="display-title mt-4 text-3xl md:text-5xl">Três atividades importantes do dia a dia.</h2>
@@ -452,6 +390,81 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <section id="dicionario" className="scroll-mt-20 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="grid gap-7 md:grid-cols-[1fr_0.85fr] md:items-end">
+            <div>
+              <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-primary"><BookOpen className="h-4 w-4" /> Palavras do dia a dia</p>
+              <h2 className="display-title mt-3 text-3xl md:text-4xl">Dicionário do manejo</h2>
+              <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">Veja o que significam as palavras mais difíceis usadas nas orientações sobre os búfalos. Explicações simples e opção para ouvir.</p>
+            </div>
+            <label className="relative block">
+              <span className="sr-only">Pesquisar termo</span>
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="search"
+                value={dictionarySearch}
+                onChange={(event) => setDictionarySearch(event.target.value)}
+                placeholder="Pesquisar palavra..."
+                className="w-full rounded-2xl border border-border bg-surface py-4 pl-12 pr-4 text-base outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+              />
+            </label>
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {dictionaryTerms.filter((entry) => `${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))).map((entry) => (
+              <article key={entry.term} className="rounded-2xl border border-border bg-surface p-5 transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <h3 className="text-lg font-bold text-primary">{entry.term}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/85">{entry.meaning}</p>
+                <button type="button" onClick={() => speak(`${entry.term}. ${entry.meaning}`)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                  <Headphones className="h-4 w-4" /> Ouvir significado
+                </button>
+              </article>
+            ))}
+            {dictionaryTerms.every((entry) => !`${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))) && (
+              <p className="rounded-xl border border-dashed border-border p-5 text-center text-sm text-muted-foreground sm:col-span-2 lg:col-span-3">Nenhuma palavra encontrada. Tente outro termo.</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section id="alunos-respondem" className="scroll-mt-20 bg-surface py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Dúvidas sobre o manejo</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Alunos respondem</h2>
+            <p className="mt-3 leading-relaxed text-muted-foreground">Perguntas e respostas preparadas pelos alunos sobre os cuidados com búfalas leiteiras e a rotina da propriedade. Clique em uma pergunta para ver a resposta.</p>
+          </div>
+          <div className="mt-8 grid gap-3 md:grid-cols-2">
+            {[
+              { question: "Por que devemos fazer a higiene dos tetos antes da ordenha?", answer: "Porque a sujeira nos tetos pode comprometer a higiene durante a ordenha e a qualidade do leite. A rotina inclui limpeza, pré-dipping e secagem individual, conforme o produto utilizado." },
+              { question: "O que é pré-dipping?", answer: "É a aplicação de um produto próprio para higienizar os tetos antes da ordenha. É importante respeitar as orientações e o tempo de ação indicados pelo fabricante." },
+              { question: "Por que devemos secar cada teto com papel-toalha individual?", answer: "Para evitar levar sujeira de um teto ou animal para outro. Não se deve usar o mesmo papel em vários animais." },
+              { question: "O que devemos observar nos primeiros jatos de leite?", answer: "Devemos observar se há alterações no leite. Se notar algo diferente, o animal precisa ser avaliado e a orientação técnica da propriedade deve ser seguida." },
+              { question: "Por que os sacos de ração não devem ficar diretamente no chão?", answer: "Porque podem absorver umidade e ficar mais expostos à sujeira e às pragas. O ideal é armazená-los sobre paletes ou estrados." },
+              { question: "Como deve ser o local de armazenamento da ração e dos farelos?", answer: "Deve ser seco, limpo e ventilado, com os sacos afastados do chão e das paredes e protegido contra roedores e insetos." },
+              { question: "O que fazer se encontrar ração úmida, mofada ou com embalagem danificada?", answer: "Separe esse alimento e não o ofereça aos animais até receber orientação técnica. Também confira a validade e as condições das embalagens." },
+              { question: "Por que acompanhar a amamentação dos bezerros depois da ordenha?", answer: "Para observar se cada bezerro consegue mamar na própria mãe e identificar animais com dificuldade ou desconforto." },
+              { question: "Quanto tempo os animais permanecem nos piquetes durante a rotina de amamentação apresentada?", answer: "A orientação do material é manter os animais nos piquetes por cerca de 20 a 30 minutos, observando se os bezerros mamaram." },
+              { question: "O que é pós-dipping e quando ele é feito?", answer: "É a aplicação de um produto nos tetos após a ordenha, como parte dos cuidados de higiene e proteção." },
+            ].map((item, index) => (
+              <details key={item.question} className="group rounded-2xl border border-border bg-background p-5 open:border-primary/50 open:shadow-sm">
+                <summary className="flex cursor-pointer list-none items-start gap-3 font-semibold leading-relaxed marker:hidden">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">{index + 1}</span>
+                  <span className="flex-1">{item.question}</span>
+                  <span className="text-xl text-primary transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="ml-10 mt-4 border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+                <button type="button" onClick={() => speak(`${item.question}. ${item.answer}`)} className="ml-10 mt-3 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                  <Headphones className="h-4 w-4" /> Ouvir resposta
+                </button>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
 
       <section id="racas" className="scroll-mt-20 bg-forest text-forest-foreground">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
