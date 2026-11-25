@@ -306,7 +306,7 @@ function Index() {
               <span className="mt-1 text-[11px] font-medium tracking-wide text-muted-foreground">Projeto de extensão V</span>
             </span>
           </a>
-          <div className="flex max-w-full flex-1 items-center justify-end gap-2 overflow-x-auto text-sm md:gap-3">
+          <div className="hidden max-w-full flex-1 items-center justify-end gap-2 overflow-x-auto text-sm md:flex md:gap-3">
             <a href="#inicio" className="shrink-0 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Início</a>
             <details className="group relative shrink-0">
               <summary className="flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface [&::-webkit-details-marker]:hidden">Manejo <ChevronDown className="h-4 w-4 text-primary transition-transform duration-200 group-open:rotate-180" /></summary>
