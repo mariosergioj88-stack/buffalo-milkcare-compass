@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves, BookOpen, Search } from "lucide-react";
 import heroVideo from "@/assets/bufalas-hero.mp4.asset.json";
 import heroPoster from "@/assets/bufalas-hero-poster.jpg.asset.json";
 import higiene from "@/assets/higiene-ordenha.jpg";
@@ -135,6 +135,7 @@ function Index() {
   const [breedIndex, setBreedIndex] = useState(0);
   const [breedPaused, setBreedPaused] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("Norte");
+  const [dictionarySearch, setDictionarySearch] = useState("");
   const breedCarouselRef = useRef<HTMLDivElement>(null);
   const [buffaloPart, setBuffaloPart] = useState({
     key: "ubere",
@@ -233,6 +234,7 @@ function Index() {
           <div className="hidden items-center gap-7 text-sm md:flex">
             <a href="#rotina" className="hover:opacity-70">Rotina prática</a>
             <a href="#racas" className="hover:opacity-70">Raças bubalinas</a>
+            <a href="#dicionario" className="hover:opacity-70">Dicionário</a>
             <a href="#historico" className="hover:opacity-70">Histórico</a>
           </div>
           <a href="#rotina" className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Começar</a>
@@ -267,6 +269,67 @@ function Index() {
           Manejo responsável · Bem-estar · Qualidade do leite
         </div>
       </header>
+
+      <section id="dicionario" className="scroll-mt-20 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-primary"><BookOpen className="h-4 w-4" /> Aprenda sem complicação</p>
+              <h2 className="display-title mt-3 text-3xl md:text-4xl">Dicionário do manejo.</h2>
+              <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">Encontre o significado de palavras que aparecem nas orientações. Pesquise um termo e aprenda no seu ritmo.</p>
+            </div>
+            <label className="relative block">
+              <span className="sr-only">Pesquisar palavra no dicionário</span>
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="search"
+                value={dictionarySearch}
+                onChange={(event) => setDictionarySearch(event.target.value)}
+                placeholder="Digite uma palavra, por exemplo: úbere"
+                className="w-full rounded-2xl border border-border bg-surface py-4 pl-12 pr-4 text-base outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+              />
+            </label>
+          </div>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { term: "Bubalino", meaning: "Animal da espécie dos búfalos." },
+              { term: "Úbere", meaning: "Parte do corpo da fêmea onde o leite é produzido e armazenado." },
+              { term: "Tetos", meaning: "Estruturas do úbere por onde o leite sai durante a ordenha." },
+              { term: "Ordenha", meaning: "Retirada do leite da búfala, feita manualmente ou com equipamento." },
+              { term: "Pré-dipping", meaning: "Higienização dos tetos antes da ordenha, usando produto próprio e seguindo o tempo indicado." },
+              { term: "Pós-dipping", meaning: "Aplicação de produto nos tetos depois da ordenha para ajudar na proteção e higiene." },
+              { term: "Piquete", meaning: "Área menor de pastagem, cercada, usada para manter ou separar os animais." },
+              { term: "Palete ou estrado", meaning: "Base elevada que mantém os sacos de ração afastados do chão." },
+              { term: "Farelo", meaning: "Parte moída de um alimento, como soja ou trigo, que pode entrar na composição da ração." },
+              { term: "Contaminação", meaning: "Presença de sujeira, microrganismos ou substâncias que podem prejudicar o alimento ou o leite." },
+              { term: "Ventilação", meaning: "Circulação do ar no ambiente, importante para reduzir calor e umidade." },
+              { term: "Bem-estar animal", meaning: "Condição em que o animal tem acesso a água, alimento, conforto, saúde e pode expressar comportamentos naturais." },
+            ].filter((entry) => `${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))).map((entry) => (
+              <article key={entry.term} className="rounded-2xl border border-border bg-surface p-5 transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
+                <h3 className="text-lg font-bold text-primary">{entry.term}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/85">{entry.meaning}</p>
+                <button type="button" onClick={() => speak(`${entry.term}. ${entry.meaning}`)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"><Headphones className="h-4 w-4" /> Ouvir significado</button>
+              </article>
+            ))}
+          </div>
+          {[
+            { term: "Bubalino", meaning: "Animal da espécie dos búfalos." },
+            { term: "Úbere", meaning: "Parte do corpo da fêmea onde o leite é produzido e armazenado." },
+            { term: "Tetos", meaning: "Estruturas do úbere por onde o leite sai durante a ordenha." },
+            { term: "Ordenha", meaning: "Retirada do leite da búfala, feita manualmente ou com equipamento." },
+            { term: "Pré-dipping", meaning: "Higienização dos tetos antes da ordenha, usando produto próprio e seguindo o tempo indicado." },
+            { term: "Pós-dipping", meaning: "Aplicação de produto nos tetos depois da ordenha para ajudar na proteção e higiene." },
+            { term: "Piquete", meaning: "Área menor de pastagem, cercada, usada para manter ou separar os animais." },
+            { term: "Palete ou estrado", meaning: "Base elevada que mantém os sacos de ração afastados do chão." },
+            { term: "Farelo", meaning: "Parte moída de um alimento, como soja ou trigo, que pode entrar na composição da ração." },
+            { term: "Contaminação", meaning: "Presença de sujeira, microrganismos ou substâncias que podem prejudicar o alimento ou o leite." },
+            { term: "Ventilação", meaning: "Circulação do ar no ambiente, importante para reduzir calor e umidade." },
+            { term: "Bem-estar animal", meaning: "Condição em que o animal tem acesso a água, alimento, conforto, saúde e pode expressar comportamentos naturais." },
+          ].every((entry) => !`${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))) && (
+            <p className="mt-6 rounded-xl border border-dashed border-border p-5 text-center text-sm text-muted-foreground">Nenhuma palavra encontrada. Tente pesquisar outro termo.</p>
+          )}
+        </div>
+      </section>
 
       <section id="rotina" className="scroll-mt-20 bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-5">
