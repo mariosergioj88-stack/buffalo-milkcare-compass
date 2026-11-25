@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves } from "lucide-react";
-import hero from "@/assets/bufalas-pasto.jpg";
+import heroVideo from "@/assets/bufalas-hero.mp4.asset.json";
+import heroPoster from "@/assets/bufalas-hero-poster.jpg.asset.json";
 import higiene from "@/assets/higiene-ordenha.jpg";
 import posOrdenha from "@/assets/pos-ordenha.jpg";
 import racao from "@/assets/racao-armazenada.jpg";
@@ -149,7 +150,11 @@ function Index() {
     }
   }, [history]);
 
-  const active = useMemo(() => modules.find((item) => item.id === activeModule) ?? modules[0], [activeModule]);
+  // modules is a fixed, non-empty list, so the first entry is always present.
+  const active = useMemo(
+    () => modules.find((item) => item.id === activeModule) ?? modules[0]!,
+    [activeModule],
+  );
 
   useEffect(() => {
     if (breedPaused) return;
@@ -233,9 +238,10 @@ function Index() {
           loop
           playsInline
           preload="metadata"
+          poster={heroPoster.url}
           aria-label="Rebanho de búfalos-d'água pastando ao ar livre"
         >
-          <source src="https://videos.pexels.com/video-files/29712016/12775713_1920_1080_25fps.mp4" type="video/mp4" />
+          <source src={heroVideo.url} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/75" />
         <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
