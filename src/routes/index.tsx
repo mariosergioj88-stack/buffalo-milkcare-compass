@@ -376,46 +376,14 @@ function Index() {
             </div>
             <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
               <div className="rounded-3xl bg-gradient-to-br from-[#172d26] to-[#0a1511] p-3 sm:p-5">
-                <svg viewBox="0 0 470 520" role="group" aria-label="Mapa ilustrativo do Brasil dividido em cinco regiões clicáveis" className="mx-auto block w-full max-w-[460px] overflow-visible">
-                  <defs>
-                    <filter id="region-shadow" x="-30%" y="-20%" width="170%" height="170%">
-                      <feDropShadow dx="0" dy="13" stdDeviation="7" floodColor="#000000" floodOpacity=".65" />
-                    </filter>
-                    <filter id="region-glow" x="-30%" y="-30%" width="160%" height="160%">
-                      <feGaussianBlur stdDeviation="7" />
-                    </filter>
-                  </defs>
-                  <g transform="translate(0 9)" opacity=".7">
-                    {buffaloRegions.map((region) => <polygon key={region.name} points={region.points} fill="#050b08" stroke="#050b08" strokeWidth="9" strokeLinejoin="round" />)}
-                  </g>
-                  <g filter="url(#region-shadow)">
-                    {buffaloRegions.map((region) => (
-                      <polygon
-                        key={region.name}
-                        points={region.points}
-                        fill={region.color}
-                        stroke={selectedRegion === region.name ? "#ffffff" : "#102019"}
-                        strokeWidth={selectedRegion === region.name ? "5" : "3"}
-                        strokeLinejoin="round"
-                        role="button"
-                        tabIndex={0}
-                        aria-label={`Selecionar região ${region.name}`}
-                        aria-pressed={selectedRegion === region.name}
-                        onClick={() => setSelectedRegion(region.name)}
-                        onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedRegion(region.name); } }}
-                        className="cursor-pointer transition-all duration-200 hover:brightness-125 focus:outline-none"
-                        style={{ filter: selectedRegion === region.name ? "brightness(1.16)" : "none" }}
-                      />
-                    ))}
-                  </g>
-                  {buffaloRegions.map((region) => {
-                    const positions: Record<string, [number, number]> = { Norte: [220, 93], Nordeste: [370, 143], "Centro-Oeste": [211, 211], Sudeste: [348, 261], Sul: [318, 385] };
-                    const [x, y] = positions[region.name];
-                    return <text key={region.name} x={x} y={y} textAnchor="middle" dominantBaseline="middle" fill="#101010" fontSize="13" fontWeight="900" pointerEvents="none">{region.name === "Centro-Oeste" ? "CENTRO-" : region.name.toUpperCase()}</text>;
-                  })}
-                  <text x="211" y="226" textAnchor="middle" fill="#101010" fontSize="12" fontWeight="900" pointerEvents="none">OESTE</text>
-                  <text x="235" y="510" textAnchor="middle" fill="#ffffff" opacity=".65" fontSize="10" letterSpacing="2">MAPA REGIONAL ILUSTRATIVO</text>
-                </svg>
+                <div className="mx-auto flex min-h-[360px] w-full max-w-[520px] items-center justify-center rounded-2xl bg-[#e9f0e9] p-2 sm:p-4">
+                  <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Brazil_Labelled_Map.svg"
+                    alt="Mapa geográfico do Brasil dividido em estados e nas cinco regiões"
+                    loading="lazy"
+                    className="max-h-[520px] w-full object-contain"
+                  />
+                </div>          </svg>
                 <div className="mt-2 flex flex-wrap justify-center gap-2">
                   {buffaloRegions.map((region) => (
                     <button key={region.name} type="button" onClick={() => setSelectedRegion(region.name)} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition ${selectedRegion === region.name ? "border-white bg-white text-[#102019]" : "border-white/25 text-white hover:bg-white/10"}`}>
@@ -456,8 +424,8 @@ function Index() {
                 );
               })()}
             </div>
-            <p className="mt-4 text-center text-xs text-white/55">O desenho do mapa é esquemático: as áreas representam as cinco grandes regiões, não os limites exatos dos estados.</p>
-            <p className="mt-2 text-center text-xs text-white/60">Fonte: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
+            <p className="mt-4 text-center text-xs text-white/55">Mapa político com contornos reais dos estados e divisão regional. Selecione uma região nos botões para consultar os dados do rebanho bubalino.</p>
+            <p className="mt-2 text-center text-xs text-white/60">Mapa: <a href="https://commons.wikimedia.org/wiki/File:Brazil_Labelled_Map.svg" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">Wikimedia Commons</a> · Dados: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
           </div>
 
           <div className="mt-10">
