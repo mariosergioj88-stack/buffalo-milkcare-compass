@@ -106,6 +106,14 @@ const modules: {
   },
 ];
 
+const buffaloRegions = [
+  { name: "Norte", color: "#16c65b", total: "1.278.440", share: "71,1%", states: "Pará, Amapá, Amazonas, Rondônia, Tocantins, Acre e Roraima", highlight: "O Norte concentra a maior parte do rebanho bubalino brasileiro. Pará (736.437 cabeças) e Amapá (346.321) são os grandes destaques.", note: "A criação tem forte presença em áreas de várzea e campos alagáveis, especialmente na Ilha de Marajó e em outras áreas amazônicas.", points: "96,38 148,26 218,43 275,27 335,62 320,122 276,145 226,133 192,166 135,151 104,119" },
+  { name: "Nordeste", color: "#168bff", total: "139.836", share: "7,8%", states: "Maranhão, Piauí, Ceará, Rio Grande do Norte, Paraíba, Pernambuco, Alagoas, Sergipe e Bahia", highlight: "O Maranhão lidera a região, com 96.950 búfalos em 2025. A Bahia aparece em seguida, com 23.434.", note: "A região apresenta criações em diferentes sistemas e condições climáticas. O manejo de água, sombra e conforto térmico merece atenção.", points: "335,62 382,91 414,139 398,187 354,209 319,185 320,145 320,122" },
+  { name: "Centro-Oeste", color: "#f04444", total: "54.924", share: "3,1%", states: "Goiás, Mato Grosso, Mato Grosso do Sul e Distrito Federal", highlight: "Goiás tem o maior efetivo regional, com 20.709 cabeças, seguido por Mato Grosso e Mato Grosso do Sul.", note: "A região tem participação menor no total nacional, mas a criação pode integrar sistemas de produção diversificados. Pastagem, água e manejo sanitário são pontos importantes.", points: "104,119 135,151 192,166 226,133 276,145 319,145 319,185 332,246 281,277 212,263 160,228 105,192" },
+  { name: "Sudeste", color: "#ffca28", total: "219.976", share: "12,2%", states: "São Paulo, Minas Gerais, Rio de Janeiro e Espírito Santo", highlight: "São Paulo (112.615) e Minas Gerais (94.253) concentram quase todo o rebanho bubalino da região.", note: "A região reúne importantes sistemas de produção leiteira e de carne. A qualidade do leite depende de higiene na ordenha, resfriamento e bem-estar animal.", points: "319,185 354,209 398,187 414,245 384,300 337,326 281,300 281,277 332,246" },
+  { name: "Sul", color: "#a855f7", total: "103.612", share: "5,8%", states: "Paraná, Santa Catarina e Rio Grande do Sul", highlight: "O Paraná lidera a região com 46.735 cabeças, seguido pelo Rio Grande do Sul (44.354) e Santa Catarina (12.523).", note: "O clima mais frio em parte da região exige atenção especial à disponibilidade de abrigo, água e conforto dos animais nas épocas de baixas temperaturas.", points: "281,300 337,326 384,300 368,375 334,443 286,485 252,430 257,366" },
+] as const;
+
 function speak(text: string) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
@@ -126,6 +134,7 @@ function Index() {
   const [savedMessage, setSavedMessage] = useState("");
   const [breedIndex, setBreedIndex] = useState(0);
   const [breedPaused, setBreedPaused] = useState(false);
+  const [selectedRegion, setSelectedRegion] = useState("Norte");
   const breedCarouselRef = useRef<HTMLDivElement>(null);
   const [buffaloPart, setBuffaloPart] = useState({
     key: "ubere",
@@ -358,6 +367,98 @@ function Index() {
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Conheça o rebanho</p>
           <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Explore uma búfala e conheça os búfalos.</h2>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed opacity-90">Passe pelas imagens para conhecer as principais raças criadas no Brasil e um pouco da rotina desses animais. Depois, explore a imagem interativa e descubra partes importantes do corpo da búfala.</p>
+
+          <div className="mt-10 overflow-hidden rounded-[2rem] border border-white/15 bg-[#101f1a] p-5 shadow-2xl md:p-8">
+            <div className="max-w-3xl">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Bubalinocultura no Brasil</p>
+              <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Explore o mapa do rebanho bubalino</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75 md:text-base">Clique em uma das cinco regiões coloridas para descobrir quantos búfalos existem, quais estados se destacam e curiosidades sobre a criação.</p>
+            </div>
+            <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="rounded-3xl bg-gradient-to-br from-[#172d26] to-[#0a1511] p-3 sm:p-5">
+                <svg viewBox="0 0 470 520" role="group" aria-label="Mapa ilustrativo do Brasil dividido em cinco regiões clicáveis" className="mx-auto block w-full max-w-[460px] overflow-visible">
+                  <defs>
+                    <filter id="region-shadow" x="-30%" y="-20%" width="170%" height="170%">
+                      <feDropShadow dx="0" dy="13" stdDeviation="7" floodColor="#000000" floodOpacity=".65" />
+                    </filter>
+                    <filter id="region-glow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="7" />
+                    </filter>
+                  </defs>
+                  <g transform="translate(0 9)" opacity=".7">
+                    {buffaloRegions.map((region) => <polygon key={region.name} points={region.points} fill="#050b08" stroke="#050b08" strokeWidth="9" strokeLinejoin="round" />)}
+                  </g>
+                  <g filter="url(#region-shadow)">
+                    {buffaloRegions.map((region) => (
+                      <polygon
+                        key={region.name}
+                        points={region.points}
+                        fill={region.color}
+                        stroke={selectedRegion === region.name ? "#ffffff" : "#102019"}
+                        strokeWidth={selectedRegion === region.name ? "5" : "3"}
+                        strokeLinejoin="round"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Selecionar região ${region.name}`}
+                        aria-pressed={selectedRegion === region.name}
+                        onClick={() => setSelectedRegion(region.name)}
+                        onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedRegion(region.name); } }}
+                        className="cursor-pointer transition-all duration-200 hover:brightness-125 focus:outline-none"
+                        style={{ filter: selectedRegion === region.name ? "brightness(1.16)" : "none" }}
+                      />
+                    ))}
+                  </g>
+                  {buffaloRegions.map((region) => {
+                    const positions: Record<string, [number, number]> = { Norte: [220, 93], Nordeste: [370, 143], "Centro-Oeste": [211, 211], Sudeste: [348, 261], Sul: [318, 385] };
+                    const [x, y] = positions[region.name];
+                    return <text key={region.name} x={x} y={y} textAnchor="middle" dominantBaseline="middle" fill="#101010" fontSize="13" fontWeight="900" pointerEvents="none">{region.name === "Centro-Oeste" ? "CENTRO-" : region.name.toUpperCase()}</text>;
+                  })}
+                  <text x="211" y="226" textAnchor="middle" fill="#101010" fontSize="12" fontWeight="900" pointerEvents="none">OESTE</text>
+                  <text x="235" y="510" textAnchor="middle" fill="#ffffff" opacity=".65" fontSize="10" letterSpacing="2">MAPA REGIONAL ILUSTRATIVO</text>
+                </svg>
+                <div className="mt-2 flex flex-wrap justify-center gap-2">
+                  {buffaloRegions.map((region) => (
+                    <button key={region.name} type="button" onClick={() => setSelectedRegion(region.name)} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition ${selectedRegion === region.name ? "border-white bg-white text-[#102019]" : "border-white/25 text-white hover:bg-white/10"}`}>
+                      <span className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: region.color }} />{region.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {(() => {
+                const region = buffaloRegions.find((item) => item.name === selectedRegion) ?? buffaloRegions[0];
+                return (
+                  <div className="rounded-3xl bg-white p-6 text-[#14231b] shadow-xl md:p-7" aria-live="polite">
+                    <div className="flex items-center gap-3">
+                      <span className="h-4 w-4 rounded-full ring-4 ring-black/5" style={{ backgroundColor: region.color }} />
+                      <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#65736b]">Região selecionada</p>
+                    </div>
+                    <h4 className="mt-2 text-3xl font-extrabold">{region.name}</h4>
+                    <div className="mt-5 grid grid-cols-2 gap-3">
+                      <div className="rounded-2xl bg-[#f1f5f2] p-4">
+                        <p className="text-xs font-bold uppercase text-[#64736a]">Rebanho em 2025</p>
+                        <p className="mt-1 text-2xl font-extrabold tabular-nums">{region.total}</p>
+                        <p className="mt-1 text-xs text-[#64736a]">cabeças</p>
+                      </div>
+                      <div className="rounded-2xl p-4" style={{ backgroundColor: region.color + "20" }}>
+                        <p className="text-xs font-bold uppercase text-[#64736a]">Participação</p>
+                        <p className="mt-1 text-2xl font-extrabold">{region.share}</p>
+                        <p className="mt-1 text-xs text-[#64736a]">do rebanho nacional</p>
+                      </div>
+                    </div>
+                    <p className="mt-5 text-sm font-bold text-[#25392d]">Estados da região</p>
+                    <p className="mt-1 text-sm leading-relaxed text-[#536258]">{region.states}</p>
+                    <p className="mt-5 text-sm font-bold text-[#25392d]">Destaque do rebanho</p>
+                    <p className="mt-1 text-sm leading-relaxed text-[#536258]">{region.highlight}</p>
+                    <p className="mt-5 text-sm font-bold text-[#25392d]">Você sabia?</p>
+                    <p className="mt-1 text-sm leading-relaxed text-[#536258]">{region.note}</p>
+                    <p className="mt-5 border-t border-[#e5ebe6] pt-4 text-[11px] leading-relaxed text-[#77847b]">Dados regionais calculados pela soma dos efetivos estaduais da Pesquisa da Pecuária Municipal (PPM/IBGE), 2025. Percentuais arredondados.</p>
+                  </div>
+                );
+              })()}
+            </div>
+            <p className="mt-4 text-center text-xs text-white/55">O desenho do mapa é esquemático: as áreas representam as cinco grandes regiões, não os limites exatos dos estados.</p>
+            <p className="mt-2 text-center text-xs text-white/60">Fonte: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
+          </div>
 
           <div className="mt-10">
             <div className="flex flex-wrap items-end justify-between gap-4">
