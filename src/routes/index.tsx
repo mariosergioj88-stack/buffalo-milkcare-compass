@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves, BookOpen, Search } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves, BookOpen, Search } from "lucide-react";
 import heroVideo from "@/assets/bufalas-hero.mp4.asset.json";
 import heroPoster from "@/assets/bufalas-hero-poster.jpg.asset.json";
 import higiene from "@/assets/higiene-ordenha.jpg";
@@ -151,6 +151,8 @@ function Index() {
   const [breedPaused, setBreedPaused] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("Norte");
   const [dictionarySearch, setDictionarySearch] = useState("");
+  const [quizIndex, setQuizIndex] = useState(0);
+  const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
   const breedCarouselRef = useRef<HTMLDivElement>(null);
   const [buffaloPart, setBuffaloPart] = useState({
     key: "ubere",
@@ -252,7 +254,7 @@ function Index() {
           <div className="flex max-w-full flex-1 items-center justify-end gap-2 overflow-x-auto text-sm md:gap-3">
             <a href="#inicio" className="shrink-0 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Início</a>
             <details className="group relative shrink-0">
-              <summary className="cursor-pointer list-none rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Manejo <span className="ml-1 text-primary">⌄</span></summary>
+              <summary className="flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface [&::-webkit-details-marker]:hidden">Manejo <ChevronDown className="h-4 w-4 text-primary transition-transform duration-200 group-open:rotate-180" /></summary>
               <div className="absolute right-0 top-full z-40 mt-2 grid min-w-56 gap-1 rounded-2xl border border-border bg-white p-2 text-sm text-foreground shadow-xl">
                 <a href="#rotina" className="rounded-xl px-3 py-2 hover:bg-surface">Rotina prática</a>
                 <a href="#manejo-sanitario" className="rounded-xl px-3 py-2 hover:bg-surface">Manejo sanitário</a>
@@ -262,11 +264,13 @@ function Index() {
               </div>
             </details>
             <details className="group relative shrink-0">
-              <summary className="cursor-pointer list-none rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Conhecimento <span className="ml-1 text-primary">⌄</span></summary>
+              <summary className="flex cursor-pointer list-none items-center gap-2 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface [&::-webkit-details-marker]:hidden">Conhecimento <ChevronDown className="h-4 w-4 text-primary transition-transform duration-200 group-open:rotate-180" /></summary>
               <div className="absolute right-0 top-full z-40 mt-2 grid min-w-56 gap-1 rounded-2xl border border-border bg-white p-2 text-sm text-foreground shadow-xl">
                 <a href="#racas" className="rounded-xl px-3 py-2 hover:bg-surface">Raças bubalinas</a>
                 <a href="#dicionario" className="rounded-xl px-3 py-2 hover:bg-surface">Dicionário</a>
                 <a href="#alunos-respondem" className="rounded-xl px-3 py-2 hover:bg-surface">Alunos respondem</a>
+                <a href="#quiz" className="rounded-xl px-3 py-2 hover:bg-surface">Quiz dos búfalos</a>
+                <a href="#mitos-verdades" className="rounded-xl px-3 py-2 hover:bg-surface">Mitos e verdades</a>
               </div>
             </details>
             <a href="#historico" className="shrink-0 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Histórico</a>
@@ -620,6 +624,80 @@ function Index() {
       </section>
 
 
+
+      <section id="quiz" className="scroll-mt-24 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Aprenda brincando</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Quiz dos búfalos</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Teste seus conhecimentos sobre criação, comportamento, leite e cuidados com os búfalos.</p>
+          </div>
+          {(() => {
+            const questions = [
+              { q: "Qual é uma característica importante dos búfalos em dias quentes?", opts: ["Precisam de sombra, água e meios de perder calor", "Devem ficar sem água durante o dia", "Precisam permanecer sempre em galpões fechados", "Não sentem os efeitos das altas temperaturas"], a: 0, why: "Água disponível, sombra, ventilação e acesso a áreas de resfriamento ajudam no conforto térmico." },
+              { q: "Qual cuidado contribui para a qualidade do leite?", opts: ["Usar utensílios limpos e higienizados", "Deixar o leite em temperatura ambiente por várias horas", "Misturar leite de animais em tratamento sem orientação", "Armazenar o leite em recipientes abertos"], a: 0, why: "Higiene na ordenha e nos utensílios reduz o risco de contaminação." },
+              { q: "Por que identificar cada animal individualmente?", opts: ["Para acompanhar histórico, saúde e produção", "Somente para diferenciar a cor dos animais", "Para dispensar registros da propriedade", "Para evitar a necessidade de observação diária"], a: 0, why: "A identificação permite relacionar cada animal aos seus registros e acontecimentos." },
+              { q: "Ao perceber uma búfala apática e sem apetite, qual atitude é mais adequada?", opts: ["Observar, registrar e comunicar ao responsável e ao veterinário", "Administrar qualquer medicamento disponível", "Ignorar se não houver ferida aparente", "Forçar o animal a caminhar longas distâncias"], a: 0, why: "Alterações de comportamento e apetite precisam ser avaliadas; não se deve medicar por conta própria." },
+              { q: "Qual prática favorece o bem-estar durante a condução dos búfalos?", opts: ["Conduzir com calma, evitando gritos e agressões", "Aumentar o barulho para acelerar o lote", "Usar objetos para assustar os animais", "Misturar animais sem observar suas reações"], a: 0, why: "O manejo calmo reduz o estresse e torna a condução mais segura para pessoas e animais." },
+            ];
+            const current = questions[quizIndex];
+            const selected = quizAnswers[quizIndex];
+            const finished = quizIndex >= questions.length;
+            const score = questions.filter((q, i) => quizAnswers[i] === String(q.a)).length;
+            return <div className="mt-8 max-w-3xl rounded-3xl border border-border bg-white p-6 shadow-sm md:p-8">
+              <div className="flex items-center justify-between gap-3 text-sm text-muted-foreground"><span>Questão {Math.min(quizIndex + 1, questions.length)} de {questions.length}</span><span>{score} acertos</span></div>
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-surface"><div className="h-full rounded-full bg-primary transition-all" style={{ width: (finished ? 100 : (quizIndex / questions.length) * 100) + "%" }} /></div>
+              {finished ? <div className="py-8 text-center">
+                <h3 className="text-2xl font-bold text-foreground">Você concluiu o quiz!</h3>
+                <p className="mt-3 text-muted-foreground">Você acertou {score} de {questions.length} questões.</p>
+                <button type="button" onClick={() => { setQuizAnswers({}); setQuizIndex(0); }} className="mt-6 rounded-full bg-primary px-6 py-3 font-semibold text-white">Refazer quiz</button>
+              </div> : <div className="mt-7">
+                <h3 className="text-xl font-semibold leading-relaxed">{current.q}</h3>
+                <div className="mt-5 grid gap-3">
+                  {current.opts.map((option, i) => {
+                    const isChosen = selected === String(i);
+                    const isCorrect = i === current.a;
+                    return <button key={option} type="button" disabled={selected !== undefined} onClick={() => setQuizAnswers(prev => ({ ...prev, [quizIndex]: String(i) }))} className={`rounded-2xl border p-4 text-left text-sm transition ${selected !== undefined && isCorrect ? "border-primary bg-primary/10 text-foreground" : isChosen ? "border-red-300 bg-red-50 text-foreground" : "border-border bg-background hover:border-primary hover:bg-surface"}`}>
+                      <span className="mr-3 font-bold text-primary">{String.fromCharCode(65 + i)}.</span>{option}
+                    </button>;
+                  })}
+                </div>
+                {selected !== undefined && <div className="mt-5 rounded-2xl bg-surface p-4 text-sm leading-relaxed"><strong>{selected === String(current.a) ? "Muito bem!" : "Vamos aprender:"}</strong> {current.why}<button type="button" onClick={() => setQuizIndex(i => i + 1)} className="mt-4 block rounded-full bg-primary px-5 py-2.5 font-semibold text-white">{quizIndex === questions.length - 1 ? "Ver resultado" : "Próxima questão"}</button></div>}
+              </div>}
+            </div>;
+          })()}
+        </div>
+      </section>
+
+      <section id="mitos-verdades" className="scroll-mt-24 bg-surface py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Conhecimento sem confusão</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Mitos e verdades sobre os búfalos</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Clique em cada afirmação para descobrir se ela é mito ou verdade e entender o motivo.</p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {[
+              { claim: "Búfalos precisam de água e sombra para enfrentar o calor.", truth: true, explanation: "Verdade. O acesso à água, sombra, ventilação e recursos para resfriamento contribui para o conforto térmico." },
+              { claim: "O leite de búfala não pode ser utilizado na produção de queijos.", truth: false, explanation: "Mito. O leite de búfala é utilizado na fabricação de diversos queijos, como a muçarela de búfala." },
+              { claim: "Todo búfalo tem comportamento agressivo.", truth: false, explanation: "Mito. O comportamento varia conforme indivíduo, ambiente, experiências e manejo. Condução calma e adequada é importante." },
+              { claim: "A identificação individual ajuda a acompanhar a saúde e a produção.", truth: true, explanation: "Verdade. Registros associados a cada animal facilitam o acompanhamento sanitário, reprodutivo e produtivo." },
+              { claim: "Búfalos são ruminantes.", truth: true, explanation: "Verdade. Como bovinos, possuem estômago dividido em compartimentos e realizam ruminação." },
+              { claim: "A higiene na ordenha influencia a qualidade do leite.", truth: true, explanation: "Verdade. Higienizar mãos, tetos e equipamentos ajuda a reduzir a contaminação do leite." },
+            ].map((item) => <details key={item.claim} className="group rounded-2xl border border-border bg-white p-5 shadow-sm">
+              <summary className="flex cursor-pointer list-none items-start gap-3 font-semibold leading-relaxed [&::-webkit-details-marker]:hidden">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary"><BookOpen className="h-4 w-4" /></span>
+                <span className="flex-1">{item.claim}</span>
+                <ChevronDown className="h-5 w-5 shrink-0 text-primary transition-transform group-open:rotate-180" />
+              </summary>
+              <div className="ml-11 mt-4 border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-muted-foreground">
+                <strong className={item.truth ? "text-primary" : "text-amber-700"}>{item.truth ? "Verdade" : "Mito"}</strong>
+                <p className="mt-1">{item.explanation}</p>
+              </div>
+            </details>)}
+          </div>
+        </div>
+      </section>
 
       <section id="racas" className="scroll-mt-20 bg-background text-foreground">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
