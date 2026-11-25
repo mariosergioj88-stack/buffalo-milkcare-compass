@@ -288,17 +288,6 @@ function Index() {
 
       <section id="rotina" className="scroll-mt-20 bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-5">
-          <figure className="mb-10 overflow-hidden rounded-3xl border border-border bg-background shadow-sm">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Milking_the_Buffalo_%2835403227412%29.jpg"
-              alt="Ordenha manual de uma búfala em uma propriedade rural"
-              className="h-64 w-full object-cover object-center sm:h-80 md:h-[26rem]"
-              loading="lazy"
-            />
-            <figcaption className="px-4 py-2 text-xs text-muted-foreground">
-              Ordenha de búfala. Foto: Mike Prince (Wikimedia Commons), licença CC BY 2.0.
-            </figcaption>
-          </figure>
           <div className="max-w-3xl">
             <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Aprender e registrar</p>
             <h2 className="display-title mt-4 text-3xl md:text-5xl">Três atividades importantes do dia a dia.</h2>
