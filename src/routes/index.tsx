@@ -153,12 +153,37 @@ function Index() {
   const [dictionarySearch, setDictionarySearch] = useState("");
   const [quizIndex, setQuizIndex] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<number, string>>({});
+  const [vaccineRecords, setVaccineRecords] = useState<{id:string; animal:string; vaccine:string; date:string; dose:string; notes:string}[]>([]);
+  const [vaccineForm, setVaccineForm] = useState({animal:"", vaccine:"", date:"", dose:"", notes:""});
+  const [diaryEntries, setDiaryEntries] = useState<{id:string; date:string; activity:string; observations:string; pending:string}[]>([]);
+  const [diaryForm, setDiaryForm] = useState({date:new Date().toISOString().slice(0,10), activity:"", observations:"", pending:""});
+  const [animalAssessment, setAnimalAssessment] = useState({animal:"", mucosas:"", body:"", temperature:"", respiration:"", behavior:"", notes:""});
   const breedCarouselRef = useRef<HTMLDivElement>(null);
   const [buffaloPart, setBuffaloPart] = useState({
     key: "ubere",
     label: "Úbere e tetos",
     description: "Antes e depois da ordenha, observe se há inchaço, feridas, dor ou alterações no leite. Mantenha a higiene dos tetos e siga a rotina de ordenha da propriedade.",
   });
+
+  useEffect(() => {
+    try {
+      const storedVaccines = localStorage.getItem("manejo-em-dia-vaccines");
+      const storedDiary = localStorage.getItem("manejo-em-dia-diary");
+      if (storedVaccines) setVaccineRecords(JSON.parse(storedVaccines));
+      if (storedDiary) setDiaryEntries(JSON.parse(storedDiary));
+    } catch {
+      // Os formulários continuam disponíveis se o armazenamento local falhar.
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("manejo-em-dia-vaccines", JSON.stringify(vaccineRecords));
+      localStorage.setItem("manejo-em-dia-diary", JSON.stringify(diaryEntries));
+    } catch {
+      // Os registros permanecem disponíveis durante esta sessão.
+    }
+  }, [vaccineRecords, diaryEntries]);
 
   useEffect(() => {
     try {
@@ -261,6 +286,10 @@ function Index() {
                 <a href="#agua-conforto" className="rounded-xl px-3 py-2 hover:bg-surface">Água e conforto</a>
                 <a href="#qualidade-leite" className="rounded-xl px-3 py-2 hover:bg-surface">Qualidade do leite</a>
                 <a href="#identificacao-animais" className="rounded-xl px-3 py-2 hover:bg-surface">Identificação dos animais</a>
+                <a href="#reproducao" className="rounded-xl px-3 py-2 hover:bg-surface">Reprodução bubalina</a>
+                <a href="#calendario-vacinal" className="rounded-xl px-3 py-2 hover:bg-surface">Calendário vacinal</a>
+                <a href="#avaliacao-animal" className="rounded-xl px-3 py-2 hover:bg-surface">Avaliação prática do animal</a>
+                <a href="#diario-propriedade" className="rounded-xl px-3 py-2 hover:bg-surface">Diário da propriedade</a>
               </div>
             </details>
             <details className="group relative shrink-0">
@@ -271,6 +300,7 @@ function Index() {
                 <a href="#alunos-respondem" className="rounded-xl px-3 py-2 hover:bg-surface">Alunos respondem</a>
                 <a href="#quiz" className="rounded-xl px-3 py-2 hover:bg-surface">Quiz dos búfalos</a>
                 <a href="#mitos-verdades" className="rounded-xl px-3 py-2 hover:bg-surface">Mitos e verdades</a>
+                <a href="#plantas-alimentos" className="rounded-xl px-3 py-2 hover:bg-surface">Plantas e alimentos do rebanho</a>
               </div>
             </details>
             <a href="#historico" className="shrink-0 rounded-full px-3 py-2 font-medium text-foreground transition hover:bg-surface">Histórico</a>
@@ -547,6 +577,117 @@ function Index() {
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Atualize os registros sempre que houver nascimento, mudança de lote, vacinação, tratamento, parto ou alteração importante na produção. Proteja as fichas e mantenha uma cópia de segurança.</p>
           </div>
           <button type="button" onClick={() => speak("A identificação individual permite reconhecer cada búfala e acompanhar seu histórico. Registre o número do animal, raça, nascimento, vacinação, exames, partos, reprodução, produção de leite e tratamentos.")} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"><Headphones className="h-4 w-4" /> Ouvir resumo</button>
+        </div>
+      </section>
+
+
+      <section id="reproducao" className="scroll-mt-20 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Planejamento do rebanho</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Reprodução bubalina</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Acompanhe os principais momentos reprodutivos de cada búfala. Registre as informações e mantenha o histórico organizado para conversar com o médico-veterinário ou responsável técnico.</p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {[
+              ["Observação do cio", "Anote a data, os sinais observados e a identificação da fêmea. Mudanças de comportamento podem ajudar a reconhecer o período de cio."],
+              ["Cobertura ou inseminação", "Registre a data, o reprodutor ou sêmen utilizado e o responsável pelo procedimento."],
+              ["Gestação e nascimento", "Acompanhe os exames de gestação, a previsão de parto e os dados do bezerro após o nascimento."]
+            ].map(([title, description]) => <article key={title} className="rounded-2xl border border-border bg-surface p-5"><h3 className="text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p></article>)}
+          </div>
+          <div className="mt-5 rounded-2xl border border-primary/20 bg-primary/5 p-5 text-sm leading-relaxed text-foreground"><strong>Importante:</strong> protocolos de reprodução, diagnóstico de gestação e intervenções devem ser definidos e acompanhados por profissional habilitado. Este espaço é para organização dos registros, não substitui avaliação veterinária.</div>
+          <button type="button" onClick={() => speak("Reprodução bubalina. Observe e registre o cio, a cobertura ou inseminação, os exames de gestação e os dados do nascimento. Procure orientação veterinária para definir os procedimentos.")} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary"><Headphones className="h-4 w-4" /> Ouvir resumo</button>
+        </div>
+      </section>
+
+      <section id="calendario-vacinal" className="scroll-mt-20 bg-surface py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Prevenção e organização</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Calendário vacinal</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Cadastre as vacinas realizadas ou programadas, com a data e a identificação do animal. O calendário não traz doses ou datas universais: siga o calendário oficial da região e a orientação do médico-veterinário.</p>
+          </div>
+          <form className="mt-8 grid gap-4 rounded-2xl border border-border bg-background p-5 md:grid-cols-2" onSubmit={(event) => { event.preventDefault(); if (!vaccineForm.animal.trim() || !vaccineForm.vaccine.trim() || !vaccineForm.date) return; setVaccineRecords((items) => [{...vaccineForm, id: String(Date.now())}, ...items]); setVaccineForm({animal:"", vaccine:"", date:"", dose:"", notes:""}); }}>
+            <label className="text-sm font-semibold">Identificação do animal<input required value={vaccineForm.animal} onChange={(e) => setVaccineForm({...vaccineForm, animal:e.target.value})} placeholder="Ex.: Brinco 025" className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2.5 font-normal" /></label>
+            <label className="text-sm font-semibold">Vacina<input required value={vaccineForm.vaccine} onChange={(e) => setVaccineForm({...vaccineForm, vaccine:e.target.value})} placeholder="Nome da vacina" className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2.5 font-normal" /></label>
+            <label className="text-sm font-semibold">Data prevista ou realizada<input required type="date" value={vaccineForm.date} onChange={(e) => setVaccineForm({...vaccineForm, date:e.target.value})} className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2.5 font-normal" /></label>
+            <label className="text-sm font-semibold">Dose / etapa<input value={vaccineForm.dose} onChange={(e) => setVaccineForm({...vaccineForm, dose:e.target.value})} placeholder="Ex.: reforço, 1ª dose" className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2.5 font-normal" /></label>
+            <label className="text-sm font-semibold md:col-span-2">Observações<textarea value={vaccineForm.notes} onChange={(e) => setVaccineForm({...vaccineForm, notes:e.target.value})} placeholder="Lote, responsável, reação observada..." rows={2} className="mt-1 w-full rounded-xl border border-border bg-background px-3 py-2.5 font-normal" /></label>
+            <button className="rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground md:col-span-2" type="submit">Adicionar ao calendário</button>
+          </form>
+          <div className="mt-6 space-y-3">
+            {vaccineRecords.length === 0 ? <p className="rounded-2xl border border-dashed border-border p-6 text-center text-sm text-muted-foreground">Nenhum registro cadastrado. Preencha o formulário para começar.</p> : vaccineRecords.map((record) => <article key={record.id} className="flex flex-wrap items-start justify-between gap-3 rounded-2xl border border-border bg-background p-4"><div><p className="font-semibold">{record.vaccine} <span className="font-normal text-muted-foreground">· {record.animal}</span></p><p className="mt-1 text-sm text-muted-foreground">{new Date(record.date+"T12:00:00").toLocaleDateString("pt-BR")} {record.dose && "· "+record.dose}</p>{record.notes && <p className="mt-2 text-sm">{record.notes}</p>}</div><button type="button" onClick={() => setVaccineRecords((items) => items.filter((item) => item.id !== record.id))} className="text-xs font-semibold text-primary hover:underline">Excluir</button></article>)}
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground">Os dados ficam salvos somente neste navegador/aparelho. Mantenha também a caderneta sanitária e os registros oficiais da propriedade.</p>
+        </div>
+      </section>
+
+      <section id="avaliacao-animal" className="scroll-mt-20 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Olhar atento ao rebanho</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Avaliação prática do animal</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Aprenda o que observar durante a rotina. Faça as anotações sem tentar fechar um diagnóstico: alterações importantes precisam de avaliação profissional.</p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {[
+              ["Mucosas", "Observe a coloração na parte interna da pálpebra, sem forçar o animal. Palidez, coloração muito intensa ou amarelada merece atenção."],
+              ["Condição corporal", "Observe se o animal está muito magro, adequado ou com excesso de gordura. Compare ao longo do tempo e use avaliação técnica."],
+              ["Temperatura", "Meça somente se souber usar o termômetro com segurança. Registre o valor, horário e método; a interpretação depende do contexto."],
+              ["Frequência respiratória", "Observe os movimentos do flanco ou tórax em repouso e conte por um minuto. Calor, esforço e estresse podem alterar a respiração."],
+              ["Comportamento", "Perceba apetite, ruminação, interação, postura, caminhada e interesse pelo ambiente. Mudanças em relação ao habitual são importantes."]
+            ].map(([title, description]) => <article key={title} className="rounded-2xl border border-border bg-surface p-5"><h3 className="text-lg font-semibold">{title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p></article>)}
+          </div>
+          <form className="mt-6 grid gap-4 rounded-2xl border border-border p-5 md:grid-cols-2" onSubmit={(event) => { event.preventDefault(); const summary = Object.entries(animalAssessment).filter(([key,value]) => key !== "animal" && value.trim()).map(([key,value]) => key+": "+value).join(". "); speak("Avaliação do animal "+animalAssessment.animal+". "+summary); }}>
+            <label className="text-sm font-semibold">Identificação do animal<input value={animalAssessment.animal} onChange={(e) => setAnimalAssessment({...animalAssessment, animal:e.target.value})} placeholder="Número do brinco ou nome" className="mt-1 w-full rounded-xl border border-border px-3 py-2.5 font-normal" /></label>
+            {([["mucosas","Mucosas"],["body","Condição corporal"],["temperature","Temperatura"],["respiration","Frequência respiratória"],["behavior","Comportamento"]] as const).map(([key,label]) => <label key={key} className="text-sm font-semibold">{label}<input value={animalAssessment[key]} onChange={(e) => setAnimalAssessment({...animalAssessment, [key]:e.target.value})} placeholder="Descreva o que observou" className="mt-1 w-full rounded-xl border border-border px-3 py-2.5 font-normal" /></label>)}
+            <label className="text-sm font-semibold md:col-span-2">Outras observações<textarea value={animalAssessment.notes} onChange={(e) => setAnimalAssessment({...animalAssessment, notes:e.target.value})} rows={2} className="mt-1 w-full rounded-xl border border-border px-3 py-2.5 font-normal" /></label>
+            <button type="button" onClick={() => speak("Avaliação prática do animal. "+Object.entries(animalAssessment).map(([key,value])=>key+": "+value).join(". "))} className="rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground md:col-span-2">Ouvir minhas anotações</button>
+          </form>
+          <div className="mt-5 rounded-2xl border border-amber-300 bg-amber-50 p-5 text-sm leading-relaxed text-amber-950"><strong>Quando chamar o veterinário:</strong> procure orientação diante de falta de apetite, dificuldade para respirar, fraqueza, mucosas muito pálidas ou amareladas, febre suspeita, dor, dificuldade para andar, alterações importantes no leite ou mudança brusca de comportamento. Em situação grave, não espere: acione o responsável e o médico-veterinário. Não medique por conta própria.</div>
+          <p className="mt-3 text-xs text-muted-foreground">Este material é educativo. A medição e a interpretação dos parâmetros devem considerar idade, estado fisiológico, ambiente e orientação veterinária.</p>
+        </div>
+      </section>
+
+      <section id="diario-propriedade" className="scroll-mt-20 bg-surface py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Registro do dia</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Diário da propriedade</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Anote o que aconteceu, as atividades realizadas, suas observações e o que ainda precisa ser feito.</p>
+          </div>
+          <form className="mt-8 grid gap-4 rounded-2xl border border-border bg-background p-5 md:grid-cols-2" onSubmit={(event) => { event.preventDefault(); if (!diaryForm.activity.trim()) return; setDiaryEntries((items) => [{...diaryForm, id:String(Date.now())}, ...items]); setDiaryForm({date:new Date().toISOString().slice(0,10), activity:"", observations:"", pending:""}); }}>
+            <label className="text-sm font-semibold">Data<input required type="date" value={diaryForm.date} onChange={(e) => setDiaryForm({...diaryForm,date:e.target.value})} className="mt-1 w-full rounded-xl border border-border px-3 py-2.5 font-normal" /></label>
+            <label className="text-sm font-semibold">Atividade realizada<input required value={diaryForm.activity} onChange={(e) => setDiaryForm({...diaryForm,activity:e.target.value})} placeholder="Ex.: limpeza do curral, ordenha..." className="mt-1 w-full rounded-xl border border-border px-3 py-2.5 font-normal" /></label>
+            <label className="text-sm font-semibold">Ocorrências e observações<textarea rows={3} value={diaryForm.observations} onChange={(e) => setDiaryForm({...diaryForm,observations:e.target.value})} className="mt-1 w-full rounded-xl border border-border px-3 py-2.5 font-normal" /></label>
+            <label className="text-sm font-semibold">Pendências para acompanhar<textarea rows={3} value={diaryForm.pending} onChange={(e) => setDiaryForm({...diaryForm,pending:e.target.value})} className="mt-1 w-full rounded-xl border border-border px-3 py-2.5 font-normal" /></label>
+            <button type="submit" className="rounded-full bg-primary px-5 py-3 text-sm font-bold text-primary-foreground md:col-span-2">Salvar no diário</button>
+          </form>
+          <div className="mt-6 space-y-3">
+            {diaryEntries.length === 0 ? <p className="rounded-2xl border border-dashed border-border p-6 text-center text-sm text-muted-foreground">Seu diário ainda está vazio.</p> : diaryEntries.map((entry) => <article key={entry.id} className="rounded-2xl border border-border bg-background p-5"><div className="flex flex-wrap justify-between gap-2"><h3 className="font-semibold">{entry.activity}</h3><span className="text-sm text-muted-foreground">{new Date(entry.date+"T12:00:00").toLocaleDateString("pt-BR")}</span></div>{entry.observations && <p className="mt-2 text-sm"><strong>Observações:</strong> {entry.observations}</p>}{entry.pending && <p className="mt-2 text-sm"><strong>Pendências:</strong> {entry.pending}</p>}<button type="button" onClick={() => setDiaryEntries((items) => items.filter((item) => item.id !== entry.id))} className="mt-3 text-xs font-semibold text-primary hover:underline">Excluir registro</button></article>)}
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground">Os registros ficam salvos neste aparelho e navegador. Não substituem documentos oficiais nem são compartilhados automaticamente.</p>
+        </div>
+      </section>
+
+      <section id="plantas-alimentos" className="scroll-mt-20 bg-background py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Alimentação do rebanho</p>
+            <h2 className="display-title mt-3 text-3xl md:text-4xl">Plantas e alimentos do rebanho</h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Conheça exemplos de forrageiras, capins e alimentos usados na alimentação de búfalos. A escolha depende do solo, clima, fase de produção e planejamento nutricional da propriedade.</p>
+          </div>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {name:"Capim-elefante", detail:"Forrageira de alto potencial de produção de massa. O manejo de corte e a oferta devem considerar idade da planta e orientação técnica.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Pennisetum_purpureum.jpg?width=1000"},
+              {name:"Braquiária", detail:"Grupo de gramíneas muito utilizado em pastagens tropicais. A espécie e o manejo precisam ser adequados ao ambiente e ao rebanho.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Urochloa_brizantha.jpg?width=1000"},
+              {name:"Tifton", detail:"Gramínea usada em pastagens e produção de feno. A qualidade depende do ponto de corte e da conservação.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Cynodon_dactylon.jpg?width=1000"},
+              {name:"Cana-de-açúcar", detail:"Pode ser utilizada como volumoso em sistemas planejados, com balanceamento da dieta por profissional de nutrição animal.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Sugarcane_field.jpg?width=1000"},
+              {name:"Silagem", detail:"Alimento conservado por fermentação, feito a partir de forragens. A qualidade e a conservação devem ser conferidas antes do fornecimento.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Corn_silage.jpg?width=1000"},
+              {name:"Feno", detail:"Forragem desidratada para armazenamento. Deve estar seco, sem mofo e protegido da umidade.", image:"https://commons.wikimedia.org/wiki/Special:FilePath/Hay_bales.jpg?width=1000"}
+            ].map((food) => <article key={food.name} className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm"><img src={food.image} alt={food.name} loading="lazy" className="h-48 w-full object-cover" /><div className="p-5"><h3 className="text-lg font-semibold">{food.name}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{food.detail}</p></div></article>)}
+          </div>
+          <div className="mt-5 rounded-2xl bg-primary/5 p-5 text-sm leading-relaxed"><strong>Atenção:</strong> não ofereça plantas desconhecidas, mofadas ou contaminadas. A dieta deve ser equilibrada e adaptada aos animais por profissional habilitado. Imagens ilustrativas.</div>
         </div>
       </section>
 
