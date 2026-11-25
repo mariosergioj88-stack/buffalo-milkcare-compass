@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves, BookOpen, Search } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves } from "lucide-react";
 import heroVideo from "@/assets/bufalas-hero.mp4.asset.json";
 import heroPoster from "@/assets/bufalas-hero-poster.jpg.asset.json";
 import higiene from "@/assets/higiene-ordenha.jpg";
@@ -135,7 +135,6 @@ function Index() {
   const [breedIndex, setBreedIndex] = useState(0);
   const [breedPaused, setBreedPaused] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("Norte");
-  const [dictionarySearch, setDictionarySearch] = useState("");
   const breedCarouselRef = useRef<HTMLDivElement>(null);
   const [buffaloPart, setBuffaloPart] = useState({
     key: "ubere",
@@ -234,7 +233,6 @@ function Index() {
           <div className="hidden items-center gap-7 text-sm md:flex">
             <a href="#rotina" className="hover:opacity-70">Rotina prática</a>
             <a href="#racas" className="hover:opacity-70">Raças bubalinas</a>
-            <a href="#dicionario" className="hover:opacity-70">Dicionário</a>
             <a href="#historico" className="hover:opacity-70">Histórico</a>
           </div>
           <a href="#rotina" className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Começar</a>
@@ -269,67 +267,6 @@ function Index() {
           Manejo responsável · Bem-estar · Qualidade do leite
         </div>
       </header>
-
-      <section id="dicionario" className="scroll-mt-20 bg-background py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
-            <div>
-              <p className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-primary"><BookOpen className="h-4 w-4" /> Aprenda sem complicação</p>
-              <h2 className="display-title mt-3 text-3xl md:text-4xl">Dicionário do manejo.</h2>
-              <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">Encontre o significado de palavras que aparecem nas orientações. Pesquise um termo e aprenda no seu ritmo.</p>
-            </div>
-            <label className="relative block">
-              <span className="sr-only">Pesquisar palavra no dicionário</span>
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="search"
-                value={dictionarySearch}
-                onChange={(event) => setDictionarySearch(event.target.value)}
-                placeholder="Digite uma palavra, por exemplo: úbere"
-                className="w-full rounded-2xl border border-border bg-surface py-4 pl-12 pr-4 text-base outline-none transition placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
-              />
-            </label>
-          </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { term: "Bubalino", meaning: "Animal da espécie dos búfalos." },
-              { term: "Úbere", meaning: "Parte do corpo da fêmea onde o leite é produzido e armazenado." },
-              { term: "Tetos", meaning: "Estruturas do úbere por onde o leite sai durante a ordenha." },
-              { term: "Ordenha", meaning: "Retirada do leite da búfala, feita manualmente ou com equipamento." },
-              { term: "Pré-dipping", meaning: "Higienização dos tetos antes da ordenha, usando produto próprio e seguindo o tempo indicado." },
-              { term: "Pós-dipping", meaning: "Aplicação de produto nos tetos depois da ordenha para ajudar na proteção e higiene." },
-              { term: "Piquete", meaning: "Área menor de pastagem, cercada, usada para manter ou separar os animais." },
-              { term: "Palete ou estrado", meaning: "Base elevada que mantém os sacos de ração afastados do chão." },
-              { term: "Farelo", meaning: "Parte moída de um alimento, como soja ou trigo, que pode entrar na composição da ração." },
-              { term: "Contaminação", meaning: "Presença de sujeira, microrganismos ou substâncias que podem prejudicar o alimento ou o leite." },
-              { term: "Ventilação", meaning: "Circulação do ar no ambiente, importante para reduzir calor e umidade." },
-              { term: "Bem-estar animal", meaning: "Condição em que o animal tem acesso a água, alimento, conforto, saúde e pode expressar comportamentos naturais." },
-            ].filter((entry) => `${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))).map((entry) => (
-              <article key={entry.term} className="rounded-2xl border border-border bg-surface p-5 transition hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md">
-                <h3 className="text-lg font-bold text-primary">{entry.term}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/85">{entry.meaning}</p>
-                <button type="button" onClick={() => speak(`${entry.term}. ${entry.meaning}`)} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"><Headphones className="h-4 w-4" /> Ouvir significado</button>
-              </article>
-            ))}
-          </div>
-          {[
-            { term: "Bubalino", meaning: "Animal da espécie dos búfalos." },
-            { term: "Úbere", meaning: "Parte do corpo da fêmea onde o leite é produzido e armazenado." },
-            { term: "Tetos", meaning: "Estruturas do úbere por onde o leite sai durante a ordenha." },
-            { term: "Ordenha", meaning: "Retirada do leite da búfala, feita manualmente ou com equipamento." },
-            { term: "Pré-dipping", meaning: "Higienização dos tetos antes da ordenha, usando produto próprio e seguindo o tempo indicado." },
-            { term: "Pós-dipping", meaning: "Aplicação de produto nos tetos depois da ordenha para ajudar na proteção e higiene." },
-            { term: "Piquete", meaning: "Área menor de pastagem, cercada, usada para manter ou separar os animais." },
-            { term: "Palete ou estrado", meaning: "Base elevada que mantém os sacos de ração afastados do chão." },
-            { term: "Farelo", meaning: "Parte moída de um alimento, como soja ou trigo, que pode entrar na composição da ração." },
-            { term: "Contaminação", meaning: "Presença de sujeira, microrganismos ou substâncias que podem prejudicar o alimento ou o leite." },
-            { term: "Ventilação", meaning: "Circulação do ar no ambiente, importante para reduzir calor e umidade." },
-            { term: "Bem-estar animal", meaning: "Condição em que o animal tem acesso a água, alimento, conforto, saúde e pode expressar comportamentos naturais." },
-          ].every((entry) => !`${entry.term} ${entry.meaning}`.toLocaleLowerCase("pt-BR").includes(dictionarySearch.trim().toLocaleLowerCase("pt-BR"))) && (
-            <p className="mt-6 rounded-xl border border-dashed border-border p-5 text-center text-sm text-muted-foreground">Nenhuma palavra encontrada. Tente pesquisar outro termo.</p>
-          )}
-        </div>
-      </section>
 
       <section id="rotina" className="scroll-mt-20 bg-surface py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-5">
@@ -439,14 +376,46 @@ function Index() {
             </div>
             <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]">
               <div className="rounded-3xl bg-gradient-to-br from-[#172d26] to-[#0a1511] p-3 sm:p-5">
-                <div className="mx-auto flex min-h-[360px] w-full max-w-[520px] items-center justify-center rounded-2xl bg-[#e9f0e9] p-2 sm:p-4">
-                  <img
-                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Brazil_Labelled_Map.svg"
-                    alt="Mapa geográfico do Brasil dividido em estados e nas cinco regiões"
-                    loading="lazy"
-                    className="max-h-[520px] w-full object-contain"
-                  />
-                </div>          </svg>
+                <svg viewBox="0 0 470 520" role="group" aria-label="Mapa ilustrativo do Brasil dividido em cinco regiões clicáveis" className="mx-auto block w-full max-w-[460px] overflow-visible">
+                  <defs>
+                    <filter id="region-shadow" x="-30%" y="-20%" width="170%" height="170%">
+                      <feDropShadow dx="0" dy="13" stdDeviation="7" floodColor="#000000" floodOpacity=".65" />
+                    </filter>
+                    <filter id="region-glow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="7" />
+                    </filter>
+                  </defs>
+                  <g transform="translate(0 9)" opacity=".7">
+                    {buffaloRegions.map((region) => <polygon key={region.name} points={region.points} fill="#050b08" stroke="#050b08" strokeWidth="9" strokeLinejoin="round" />)}
+                  </g>
+                  <g filter="url(#region-shadow)">
+                    {buffaloRegions.map((region) => (
+                      <polygon
+                        key={region.name}
+                        points={region.points}
+                        fill={region.color}
+                        stroke={selectedRegion === region.name ? "#ffffff" : "#102019"}
+                        strokeWidth={selectedRegion === region.name ? "5" : "3"}
+                        strokeLinejoin="round"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Selecionar região ${region.name}`}
+                        aria-pressed={selectedRegion === region.name}
+                        onClick={() => setSelectedRegion(region.name)}
+                        onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedRegion(region.name); } }}
+                        className="cursor-pointer transition-all duration-200 hover:brightness-125 focus:outline-none"
+                        style={{ filter: selectedRegion === region.name ? "brightness(1.16)" : "none" }}
+                      />
+                    ))}
+                  </g>
+                  {buffaloRegions.map((region) => {
+                    const positions: Record<string, [number, number]> = { Norte: [220, 93], Nordeste: [370, 143], "Centro-Oeste": [211, 211], Sudeste: [348, 261], Sul: [318, 385] };
+                    const [x, y] = positions[region.name];
+                    return <text key={region.name} x={x} y={y} textAnchor="middle" dominantBaseline="middle" fill="#101010" fontSize="13" fontWeight="900" pointerEvents="none">{region.name === "Centro-Oeste" ? "CENTRO-" : region.name.toUpperCase()}</text>;
+                  })}
+                  <text x="211" y="226" textAnchor="middle" fill="#101010" fontSize="12" fontWeight="900" pointerEvents="none">OESTE</text>
+                  <text x="235" y="510" textAnchor="middle" fill="#ffffff" opacity=".65" fontSize="10" letterSpacing="2">MAPA REGIONAL ILUSTRATIVO</text>
+                </svg>
                 <div className="mt-2 flex flex-wrap justify-center gap-2">
                   {buffaloRegions.map((region) => (
                     <button key={region.name} type="button" onClick={() => setSelectedRegion(region.name)} className={`rounded-full border px-3 py-1.5 text-xs font-bold transition ${selectedRegion === region.name ? "border-white bg-white text-[#102019]" : "border-white/25 text-white hover:bg-white/10"}`}>
@@ -487,20 +456,20 @@ function Index() {
                 );
               })()}
             </div>
-            <p className="mt-4 text-center text-xs text-white/55">Mapa político com contornos reais dos estados e divisão regional. Selecione uma região nos botões para consultar os dados do rebanho bubalino.</p>
-            <p className="mt-2 text-center text-xs text-white/60">Mapa: <a href="https://commons.wikimedia.org/wiki/File:Brazil_Labelled_Map.svg" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">Wikimedia Commons</a> · Dados: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
+            <p className="mt-4 text-center text-xs text-white/55">O desenho do mapa é esquemático: as áreas representam as cinco grandes regiões, não os limites exatos dos estados.</p>
+            <p className="mt-2 text-center text-xs text-white/60">Fonte: <a href="https://www.ibge.gov.br/explica/producao-agropecuaria/bubalinos/br" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white">IBGE — Pesquisa da Pecuária Municipal</a>.</p>
           </div>
 
-          <div className="mt-14">
-            <div className="flex flex-wrap items-end justify-between gap-5">
-              <div className="max-w-2xl">
-                <span className="inline-flex items-center gap-2 rounded-full border border-lime/30 bg-lime/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-lime"><Beef className="h-4 w-4" /> Universo bubalino</span>
-                <h3 className="display-title mt-4 text-3xl font-bold md:text-4xl">Conheça as raças de búfalos</h3>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/75 md:text-base">Cada raça tem características próprias. Explore as imagens, observe os animais e descubra o que diferencia cada uma.</p>
+          <div className="mt-10">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-wider text-lime">Galeria de imagens</p>
+                <h3 className="mt-2 text-2xl font-semibold md:text-3xl">Conheça as raças bubalinas</h3>
+                <p className="mt-2 max-w-2xl text-sm opacity-80">Deslize para o lado ou use as setas para conhecer cada raça.</p>
               </div>
-              <div className="flex items-center gap-2">
-                <button type="button" onClick={() => moveBreed(-1)} aria-label="Raça anterior" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-white/5 text-white transition hover:border-lime hover:bg-lime hover:text-[#142018]"><ChevronLeft className="h-5 w-5" /></button>
-                <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima raça" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-white/5 text-white transition hover:border-lime hover:bg-lime hover:text-[#142018]"><ChevronRight className="h-5 w-5" /></button>
+              <div className="flex gap-2">
+                <button type="button" onClick={() => moveBreed(-1)} aria-label="Imagem anterior" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronLeft className="h-5 w-5" /></button>
+                <button type="button" onClick={() => moveBreed(1)} aria-label="Próxima imagem" className="rounded-full border border-white/30 p-3 transition hover:bg-white/10"><ChevronRight className="h-5 w-5" /></button>
               </div>
             </div>
             <div
@@ -514,41 +483,39 @@ function Index() {
               onTouchStart={() => setBreedPaused(true)}
               onTouchEnd={() => setBreedPaused(false)}
               aria-label="Carrossel automático de raças bubalinas"
-              className="mt-7 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6 pr-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4"
             >
               {[
-                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Murrah_buffalo_-_01.jpg?width=1800", credit: "Oleg Yunakov · Wikimedia Commons" },
-                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi_buffalo_in_village.jpg?width=1800", credit: "Santosh Gore · Wikimedia Commons" },
-                { name: "Mediterrânea", detail: "Raça de origem italiana, conhecida pela aptidão leiteira e também utilizada na produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_01.jpg?width=1800", credit: "Bernard Gagnon · Wikimedia Commons" },
-                { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Apresenta chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Philippine_water_buffalo_(carabao).JPG?width=1600", credit: "Pinoydiscus · Wikimedia Commons" },
+                { name: "Murrah", detail: "Corpo compacto e chifres curtos enrolados em espiral. É muito conhecida pela aptidão leiteira.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Murrah_buffalo_-_01.jpg?width=1800", credit: "Foto: Oleg Yunakov · Wikimedia Commons · CC BY-SA 4.0" },
+                { name: "Jafarabadi", detail: "Raça de grande porte, com cabeça forte e chifres longos e pesados, curvados para baixo.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jafarabadi_buffalo_in_village.jpg?width=1800", credit: "Foto: Santosh Gore · Wikimedia Commons · CC BY-SA 4.0" },
+                { name: "Mediterrânea", detail: "Raça selecionada na Itália, de aptidão leiteira e também utilizada para produção de carne.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Italian_Mediterranean_buffaloes_01.jpg?width=1800", credit: "Foto: Bernard Gagnon · Wikimedia Commons" },
+                { name: "Carabao", detail: "Búfalo-do-pântano, adaptado a regiões alagadas. Tem chifres mais abertos lateralmente.", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Philippine_water_buffalo_(carabao).JPG?width=1600", credit: "Foto: Pinoydiscus · CC BY-SA 3.0" },
               ].map((breed, index) => (
-                <article key={breed.name} className={`group relative h-[430px] w-[82vw] max-w-[470px] shrink-0 snap-start overflow-hidden rounded-[2rem] border border-white/15 bg-[#202a22] shadow-[0_18px_55px_rgba(0,0,0,.3)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_24px_65px_rgba(0,0,0,.45)] md:h-[500px] md:w-[44vw] ${breedIndex === index ? "ring-2 ring-lime ring-offset-4 ring-offset-[#101713]" : ""}`}>
-                  <img src={breed.image} alt={`Búfalo da raça ${breed.name}`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#07100b] via-[#07100b]/25 to-black/5" />
-                  <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-white/25 bg-black/35 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-md">
-                    <span className="h-2 w-2 rounded-full bg-lime" /> Raça bubalina
-                  </div>
-                  <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-8">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-lime">Conheça e compare</p>
-                    <h4 className="display-title mt-2 text-3xl font-bold md:text-4xl">{breed.name}</h4>
-                    <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 md:text-base">{breed.detail}</p>
-                    <div className="mt-5 flex items-center justify-between gap-3 border-t border-white/20 pt-4">
-                      <span className="text-[10px] text-white/65">Foto: {breed.credit}</span>
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime text-[#142018] transition group-hover:translate-x-1"><ArrowRight className="h-4 w-4" /></span>
-                    </div>
+                <article key={breed.name} className={`w-[82vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-2xl bg-background text-foreground shadow-lg transition ${breedIndex === index ? "ring-4 ring-lime" : ""}`}>
+                  <img src={breed.image} alt={`Búfalo da raça ${breed.name}`} loading="lazy" className="h-56 w-full object-cover" />
+                  <div className="p-5">
+                    <p className="text-xs font-bold uppercase tracking-wider text-primary">Raça bubalina</p>
+                    <h4 className="mt-2 text-2xl font-semibold">{breed.name}</h4>
+                    <p className="mt-2 min-h-20 text-sm leading-relaxed text-muted-foreground">{breed.detail}</p>
+                    <p className="mt-4 text-xs text-muted-foreground">{breed.credit}</p>
                   </div>
                 </article>
               ))}
             </div>
-            <div className="mt-1 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-2" aria-label="Selecionar raça">
-                {[0, 1, 2, 3].map((index) => (
-                  <button key={index} type="button" onClick={() => moveBreed(index - breedIndex)} aria-label={`Ir para a raça ${index + 1}`} aria-current={breedIndex === index ? "true" : undefined} className={`h-2 rounded-full transition-all duration-500 ${breedIndex === index ? "w-9 bg-lime" : "w-2.5 bg-white/35 hover:bg-white/70"}`} />
-                ))}
-              </div>
-              <span className="text-xs text-white/60">{breedPaused ? "Carrossel pausado" : "Deslize para explorar · passagem automática"}</span>
+            <div className="mt-2 flex items-center justify-center gap-2" aria-label="Selecionar raça">
+              {[0, 1, 2, 3].map((index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => moveBreed(index - breedIndex)}
+                  aria-label={`Ir para a raça ${index + 1}`}
+                  aria-current={breedIndex === index ? "true" : undefined}
+                  className={`h-2.5 rounded-full transition-all duration-500 ${breedIndex === index ? "w-8 bg-lime" : "w-2.5 bg-white/40 hover:bg-white/70"}`}
+                />
+              ))}
+              <span className="ml-2 text-xs opacity-75">{breedPaused ? "Pausado" : "Passagem automática"}</span>
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-white/55">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
+            <p className="text-xs opacity-70">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
           </div>
 
           <div className="mt-16 rounded-[2rem] border border-white/15 bg-[#101713] p-5 shadow-2xl md:p-8">
