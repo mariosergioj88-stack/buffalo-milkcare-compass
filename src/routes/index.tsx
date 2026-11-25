@@ -518,6 +518,46 @@ function Index() {
             <p className="text-xs opacity-70">As fotografias são ilustrativas. A identificação da raça deve considerar o conjunto das características do animal.</p>
           </div>
 
+          <div className="mt-16 rounded-[2rem] border border-white/15 bg-[#101713] p-5 shadow-2xl md:p-8">
+            <div className="mx-auto max-w-4xl text-center">
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-lime">Sala de documentários</p>
+              <h3 className="display-title mt-3 text-2xl font-semibold text-white md:text-4xl">Uma pausa para conhecer mais sobre os búfalos.</h3>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/75 md:text-base">Imagine que você abriu o YouTube para pesquisar. Encontramos um vídeo sobre a cadeia produtiva bubalina no Pará para você assistir aqui mesmo.</p>
+            </div>
+            <div className="relative mx-auto mt-7 max-w-4xl rounded-[1.6rem] border-[7px] border-[#252b28] bg-[#080b09] p-2 shadow-[0_22px_60px_rgba(0,0,0,.5)] md:border-[10px] md:p-3">
+              <div className="mb-3 flex items-center gap-2 rounded-xl bg-white px-3 py-2.5 text-[#202124] shadow-inner">
+                <span className="flex shrink-0 items-center gap-1.5 text-sm font-extrabold tracking-tight"><span className="inline-flex h-5 w-7 items-center justify-center rounded-md bg-[#ff0033] text-[10px] text-white">▶</span><span className="hidden sm:inline">YouTube</span></span>
+                <div className="relative flex min-w-0 flex-1 items-center rounded-full border border-[#dadce0] bg-[#f8f9fa] px-4 py-2 text-xs text-[#5f6368] sm:text-sm">
+                  <span className="truncate">documentário sobre búfalos</span>
+                  <span className="pointer-events-none absolute right-3 top-1/2 z-10 animate-[tvMouse_4s_ease-in-out_infinite] text-black drop-shadow-md" aria-hidden="true">
+                    <svg viewBox="0 0 24 30" className="h-7 w-6 fill-white stroke-black" strokeWidth="1.5"><path d="M3 2 L3 23 L8.5 17.5 L13 27 L17 25 L12.5 16 L21 15 Z" /></svg>
+                  </span>
+                </div>
+                <span className="flex h-9 w-10 shrink-0 items-center justify-center rounded-full bg-[#f1f3f4] text-[#303134]" aria-hidden="true">⌕</span>
+              </div>
+              <div className="overflow-hidden rounded-xl bg-black">
+                <div className="relative aspect-video w-full">
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src="https://www.youtube-nocookie.com/embed/Exf4krTRICo?rel=0"
+                    title="Cadeia Produtiva Bubalina no Pará — documentário"
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+              <div className="mx-auto mt-3 h-2 w-24 rounded-full bg-[#454c47]" />
+              <p className="mt-3 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">Manejo em Dia · Conteúdo educativo</p>
+            </div>
+            <div className="mx-auto mt-5 flex max-w-4xl flex-wrap items-center justify-between gap-3 text-sm text-white/75">
+              <div><p className="font-semibold text-white">Cadeia Produtiva Bubalina no Pará</p><p className="mt-1 text-xs text-white/55">Reportagem sobre a criação e a produção bubalina na região Norte.</p></div>
+              <a href="https://www.youtube.com/watch?v=Exf4krTRICo" target="_blank" rel="noreferrer" className="rounded-full border border-white/25 px-4 py-2 text-xs font-semibold transition hover:bg-white/10">Abrir no YouTube ↗</a>
+            </div>
+            <style>{`@keyframes tvMouse { 0%, 100% { transform: translate(-34px, 10px) rotate(-8deg); } 45% { transform: translate(0, -2px) rotate(4deg); } 70% { transform: translate(18px, 5px) rotate(-2deg); } }`}</style>
+          </div>
+
           <div className="mt-16 grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
               <p className="text-sm font-bold uppercase tracking-wider text-lime">Explore e aprenda</p>
