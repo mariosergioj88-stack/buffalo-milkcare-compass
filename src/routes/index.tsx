@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2 } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Clock3, Droplets, Headphones, History, Package, Plus, ShieldCheck, Trash2, Beef, Milk, Waves } from "lucide-react";
 import hero from "@/assets/bufalas-pasto.jpg";
 import higiene from "@/assets/higiene-ordenha.jpg";
 import posOrdenha from "@/assets/pos-ordenha.jpg";
@@ -182,6 +182,7 @@ function Index() {
           </a>
           <div className="hidden items-center gap-7 text-sm md:flex">
             <a href="#rotina" className="hover:opacity-70">Rotina prática</a>
+            <a href="#racas" className="hover:opacity-70">Raças bubalinas</a>
             <a href="#historico" className="hover:opacity-70">Histórico</a>
           </div>
           <a href="#rotina" className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Começar</a>
@@ -293,6 +294,65 @@ function Index() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="racas" className="scroll-mt-20 bg-forest text-forest-foreground">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-lime">Conheça o rebanho</p>
+          <h2 className="display-title mt-4 max-w-3xl text-3xl md:text-5xl">Raças bubalinas criadas no Brasil.</h2>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed opacity-90">As raças possuem características físicas e aptidões diferentes. Conhecer essas diferenças ajuda a entender o perfil dos animais da propriedade. No Brasil, a Associação Brasileira de Criadores de Búfalos reconhece quatro raças: Murrah, Jafarabadi, Mediterrânea e Carabao.</p>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 01</span>
+                <Milk className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="mt-3 text-2xl font-semibold">Murrah</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">Originária da Índia, é conhecida pelos chifres curtos e enrolados em espiral. Apresenta corpo compacto, robusto e boa aptidão leiteira. Também pode ser aproveitada para produção de carne.</p>
+              <div className="mt-4 rounded-xl bg-surface p-4">
+                <p className="text-sm font-bold text-primary">Como reconhecer</p>
+                <p className="mt-1 text-sm leading-relaxed">Pelagem geralmente preta, corpo compacto e chifres que se curvam para trás e para dentro, formando espirais.</p>
+              </div>
+            </article>
+            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 02</span>
+                <Beef className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="mt-3 text-2xl font-semibold">Jafarabadi</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">Também originária da Índia, é conhecida pelo grande porte, cabeça forte e chifres longos e pesados, que descem próximos à cabeça e se curvam nas pontas. Tem aptidão mista: leite e carne.</p>
+              <div className="mt-4 rounded-xl bg-surface p-4">
+                <p className="text-sm font-bold text-primary">Como reconhecer</p>
+                <p className="mt-1 text-sm leading-relaxed">Corpo grande e forte, testa proeminente e chifres longos, grossos e caídos.</p>
+              </div>
+            </article>
+            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 03</span>
+                <Milk className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="mt-3 text-2xl font-semibold">Mediterrânea</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">Selecionada na Itália, apresenta aptidão para leite e carne. Tem pelagem geralmente preta, corpo de porte médio a grande e características que lembram as raças Murrah e Jafarabadi.</p>
+              <div className="mt-4 rounded-xl bg-surface p-4">
+                <p className="text-sm font-bold text-primary">Como reconhecer</p>
+                <p className="mt-1 text-sm leading-relaxed">Animais geralmente pretos, com formato corporal intermediário e chifres que tendem a se projetar para os lados e para trás.</p>
+              </div>
+            </article>
+            <article className="rounded-2xl border border-forest-foreground/20 bg-background p-6 text-foreground">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-bold uppercase tracking-wider text-primary">Raça 04</span>
+                <Waves className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="mt-3 text-2xl font-semibold">Carabao</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">Originária do Sudeste Asiático, é conhecida como búfalo-do-pântano. Tem pelagem que pode variar entre cinza e rosilho, corpo forte e grande adaptação a ambientes alagados. É utilizada principalmente para carne e trabalho.</p>
+              <div className="mt-4 rounded-xl bg-surface p-4">
+                <p className="text-sm font-bold text-primary">Como reconhecer</p>
+                <p className="mt-1 text-sm leading-relaxed">Corpo mais largo, chifres que se abrem lateralmente e pelagem que pode ser mais clara ou acinzentada.</p>
+              </div>
+            </article>
+          </div>
+          <p className="mt-7 text-sm leading-relaxed opacity-80">Observação: a identificação da raça deve considerar o conjunto das características do animal e, quando necessário, o registro genealógico. Há variações entre indivíduos.</p>
         </div>
       </section>
 
