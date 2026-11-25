@@ -241,7 +241,7 @@ function Index() {
           poster={heroPoster.url}
           aria-label="Rebanho de búfalos-d'água pastando ao ar livre"
         >
-          <source src={heroVideo.url} type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/32536717/13875635_3840_2160_24fps.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/35 to-black/75" />
         <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center">
